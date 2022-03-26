@@ -14,7 +14,7 @@ Auth::routes();
 
 Route::get('/', [DashboardController::class, 'show'])->name('dashboard');
 
-Route::group(['prefix' => 'publicacion', 'middleware' => ['auth:api']], function () {
+Route::group(['prefix' => 'publicacion' /*,'middleware' => ['auth:api']]))*/], function () {
 
     Route::post('/',[PublicacionController::class, 'store']);//->middleware('scopes:altaProducto');
     Route::get('/',[PublicacionController::class, 'index']);
@@ -41,5 +41,7 @@ Route::group(['prefix' => 'busqueda'], function () {
 
     Route::get('/productos/{criterio}', [ProductoController::class, 'buscarProducto']);
 });
+
+Route::get('/registro', [RegisterController::class, 'show']);
 
 Auth::routes();

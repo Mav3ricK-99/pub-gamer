@@ -46,7 +46,9 @@ class PublicacionController extends Controller
 
     public function show($id)
     {
-        return response()->json(Publicacion::with('comentarios.respuestas', 'user')->get());
+        //return response()->json(Publicacion::with('comentarios.respuestas', 'user')->get());
+    
+        return inertia('Usuario/Perfil');
     }
 
     public function destroy($id){

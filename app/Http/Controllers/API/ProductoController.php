@@ -5,9 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Http\Requests\ProductoRequest;
 use App\Models\Producto;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Cache\Store;
 
 class ProductoController extends Controller
 {
@@ -119,6 +120,10 @@ class ProductoController extends Controller
         $prods = Producto::where('nombreProducto', 'LIKE', '%'.$criterio.'%')
                     ->orWhere('fabricante', 'LIKE', '%'.$criterio.'%')
                     ->get();
+
+        foreach($prods as $prod){
+            $prod->imagen = "data:image/jpeg;base64,".base64_encode(Storage::get('imagenes/productos/cpu-i7.jpg'));
+        }
 
         return response()->json($prods);
     }

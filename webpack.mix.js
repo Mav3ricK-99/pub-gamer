@@ -29,7 +29,5 @@ mix.webpackConfig({
 
 mix.js('resources/js/main.js', 'public/js')
     .vue()
-    .postCss("resources/css/app.css", "public/css", [
-        require("tailwindcss"),
-    ]);
+    .postCss("resources/css/app.css", "public/css");
 

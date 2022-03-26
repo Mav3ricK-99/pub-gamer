@@ -1,13 +1,13 @@
 <template>
-  LOL
+  <Layout></Layout>
+  <div>PPPEEEERFILLL</div>
 </template>
 
 <script>
+import Layout from "../Layouts/AppDashboardLayout"
 export default {
-  name: 'Perfil'
+   components: {
+      Layout,
+    },
 }
-</script>
-
-<script>
-
 </script>

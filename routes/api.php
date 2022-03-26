@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\ProductoController;
 use App\Http\Controllers\API\CartController;
 
+//ACA NO VAN TODAS SOLAMENTE LAS POST (EN CASO DE REGISTRARSE)
 Auth::routes();
 
 Route::group(['prefix' => 'producto', 'middleware' => ['auth:api']], function () {

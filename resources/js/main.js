@@ -6,6 +6,11 @@ import 'primevue/resources/themes/saga-blue/theme.css';
 import 'primeicons/primeicons.css';
 import * as VueRouter from 'vue-router'
 
+import {BootstrapVue3} from 'bootstrap-vue-3'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
+
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),
@@ -19,6 +24,7 @@ createInertiaApp({
       .use(plugin)
       .use(PrimeVue)
       .use(router)
+      .use(BootstrapVue3)
       .mount(el)
   },
 })
