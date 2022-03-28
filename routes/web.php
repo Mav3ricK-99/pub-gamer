@@ -42,6 +42,4 @@ Route::group(['prefix' => 'busqueda'], function () {
     Route::get('/productos/{criterio}', [ProductoController::class, 'buscarProducto']);
 });
 
-Route::get('/registro', [RegisterController::class, 'show']);
-
 Auth::routes();

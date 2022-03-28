@@ -1,6 +1,13 @@
 <template>
   <Layout></Layout>
   <div>Dashboard content</div>
+  <div>Dashboard content</div>
+  <div>Dashboard content</div>
+  <div>Dashboard content</div>
+  <div>Dashboard content</div>
+  <div>Dashboard content</div>
+  <div>Dashboard content</div>
+  <div>Dashboard content</div>
 </template>
 
 <script>

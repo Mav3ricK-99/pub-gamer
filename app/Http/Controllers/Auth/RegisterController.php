@@ -43,9 +43,10 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    /*  Igual deberia haber pagina para el registro
     public function show(){
         return Inertia("Usuario/Registro");
-    }
+    }*/
 
     protected function validator(array $data)
     {

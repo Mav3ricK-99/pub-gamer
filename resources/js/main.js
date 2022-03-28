@@ -5,7 +5,6 @@ import PrimeVue from 'primevue/config';
 import 'primevue/resources/themes/saga-blue/theme.css';
 import 'primeicons/primeicons.css';
 import * as VueRouter from 'vue-router'
-
 import {BootstrapVue3} from 'bootstrap-vue-3'
 
 import 'bootstrap/dist/css/bootstrap.css'
