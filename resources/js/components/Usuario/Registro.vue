@@ -10,7 +10,7 @@
         background: #171737;
       "
     >
-      <div class="flex-fill bg-cover rounded"></div>
+      <div class="flex-fill bg-cover"></div>
       <div
         class="
           form-container
@@ -21,9 +21,10 @@
           pe-3
           d-flex
           justify-content-evenly
+          rounded
         "
       >
-        <b-form class="col-lg-11" @submit="registrarse" @reset="reset">
+        <b-form class="col-lg-11" @submit="registrarse">
           <div class="d-flex justify-content-evenly mb-3">
             <label for="inp" class="inp">
               <input v-model="formulario.nombre" type="text" required id="inp" placeholder="&nbsp;"/>
@@ -107,11 +108,19 @@ export default {
   },
   methods: {
     registrarse: function (event) {
-      event.preventDefault();
       axios
-        .post("register", this.formulario)
+        .post("api/register", this.formulario)
         .then((response) => {
-          console.log(response);
+        
+          this.$emit('update:formularioRegistro', false)
+          localStorage.name = "XD";
+          this.$inertia.reload({ only: ['AppHeaderLayout'] });
+
+          this.formulario.email = '';
+          this.formulario.nombre = '';
+          this.formulario.apellido = '';
+          this.formulario.password= '';
+          this.formulario.password_confirmation = '';
         })
         .catch((error) => {
           this.errores = []
@@ -134,17 +143,7 @@ export default {
           }
           console.log(error.response);
         });
-    },
-    onReset(event) {
-      event.preventDefault();
-      formulario.email = "";
-      formulario.nombre = "";
-      formulario.checked = [];
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    },
+    }
   },
 };
 </script>

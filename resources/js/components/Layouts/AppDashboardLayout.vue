@@ -11,6 +11,10 @@ export default {
   name: "Dashboard",
   components: {
     AppHeaderLayout
-  }
+  },
+  mounted() {
+        console.log('mounted!')
+        console.log(localStorage.name);
+  },
 }
 </script>

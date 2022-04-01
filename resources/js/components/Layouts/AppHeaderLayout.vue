@@ -58,6 +58,17 @@ import Registro from "../Usuario/Registro.vue";
 
 let productos;
 export default {
+  props: {
+    isLogueado: {
+      type: Boolean,
+      default: false,
+    },
+
+    formularioRegistro: {
+      type: Boolean,
+      default: true,
+    },
+  },
   data() {
     return {
       logo: logo,
@@ -69,8 +80,6 @@ export default {
           items: [],
         },
       ],
-      isLogueado: false,
-      formularioRegistro: true,
     };
   },
   name: "AppHeaderLayout",
