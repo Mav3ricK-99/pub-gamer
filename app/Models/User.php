@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Arr;
 use App\Models\Role;
 use App\Models\Cart;
 
@@ -23,6 +24,10 @@ class User extends Authenticatable
         'nombre',
         'email',
         'password'
+    ];
+
+    protected $appends = [
+        'permisos'
     ];
 
     /**
@@ -44,8 +49,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getPermisosAttribute(){
+        
+        $permisos = [];
+        foreach($this->roles as $rol){
+            array_push($permisos, $rol->getPermisosPorRol());
+        }
 
-    public function assignRole($role) {
+        return Arr::flatten($permisos);
+    }
+
+    public function asignarRol($role) {
         $role = Role::where('descripcion', $role)->get()->first();
         return $this->roles()->save($role); 
     }

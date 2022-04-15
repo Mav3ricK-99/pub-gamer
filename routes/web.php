@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\ProductoController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\ComentarioController;
@@ -9,8 +10,6 @@ use App\Http\Controllers\PagoController;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-Auth::routes();
 
 Route::get('/', [DashboardController::class, 'show'])->name('dashboard');
 
@@ -42,4 +41,7 @@ Route::group(['prefix' => 'busqueda'], function () {
     Route::get('/productos/{criterio}', [ProductoController::class, 'buscarProducto']);
 });
 
-Auth::routes();
+Route::post('/ingresar', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/login', [LoginController::class, 'show'])->name("login");

@@ -18,12 +18,14 @@ return new class extends Migration
             $table->string('nombreProducto');
             $table->integer('stock');
             $table->float('precio');
-            $table->string('categoria');
+            $table->unsignedBigInteger('categoria');
             $table->string('fabricante');
             $table->string('descripcion');
             $table->string('sku');
             $table->integer('garantia');
             $table->string('path_imagen')->nullable();
+            $table->foreign('categoria')->references('subcategoria_id')->on('subcategorias')->onDelete('cascade');
+            
             $table->timestamps();
             $table->softDeletes();
         });

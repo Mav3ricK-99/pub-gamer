@@ -36,7 +36,7 @@ class Role extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function getPermisosArray(){
+    public function getPermisosPorRol(){
 
         $permisosArray = [];
         foreach($this->permisos as $permisos){

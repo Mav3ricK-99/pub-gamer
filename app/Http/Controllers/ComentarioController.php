@@ -41,7 +41,7 @@ class ComentarioController extends Controller
     {
         $data = $request->all();
 
-        $comentario = new Comentario;
+        $comentario = new Comentario();
         $publicacion = Publicacion::find($data['publicacion_id']);
 
         $comentario->mensaje = $data['mensaje'];

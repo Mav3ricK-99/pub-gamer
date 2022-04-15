@@ -1,30 +1,31 @@
 <template>
-  <component :is="layout">
-    <slot />
-  </component>
+  <Header
+    :formularioRegistro="formularioRegistro"
+    @mostrarRegistro="mostrarRegistro"
+  />
+  <Registro v-if="formularioRegistro" />
+  <slot />
 </template>
 
 <script>
-import AppLayoutDefault from './AppLayoutDefault.vue'
-import {shallowRef} from 'vue'; 
+import Header from "../Header.vue";
+import Registro from "../Usuario/Registro.vue";
 
 export default {
-  name: "AppLayout",
-  data: () => ({
-    layout: AppLayoutDefault
-  }),
-  watch: {
-    $route: {
-      immediate: true,
-      async handler(route) {
-        try {
-          const component = await import(`/${route.meta.layout}.vue`);
-          this.layout = shallowRef(component?.default);
-        } catch (e) {
-          this.layout = shallowRef(AppLayoutDefault);
-        }
-      }
-    }
-  }
-}
+  data() {
+    return {
+      formularioRegistro: false,
+      messages: [],
+    };
+  },
+  components: {
+    Header,
+    Registro,
+  },
+  methods: {
+    mostrarRegistro: function (toggle) {
+      this.formularioRegistro = toggle;
+    },
+  },
+};
 </script>

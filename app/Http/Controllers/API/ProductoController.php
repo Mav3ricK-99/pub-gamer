@@ -5,10 +5,13 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Http\Requests\ProductoRequest;
 use App\Models\Producto;
+use App\Models\Subcategoria;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Cache\Store;
+use stdClass;
 
 class ProductoController extends Controller
 {
@@ -41,7 +44,7 @@ class ProductoController extends Controller
         $producto = Producto::create($dataProducto);
 
         $producto->save();
-        
+
         return response()->json($producto);
     }
 
@@ -86,27 +89,29 @@ class ProductoController extends Controller
 
         $resultado = ['mensaje' => 'El producto ya fue eliminado anteriormente'];
 
-        if($producto){
+        if ($producto) {
             $resultado = $producto->delete();
         }
         return response()->json($resultado);
     }
 
     //este metodo no va aca bruh si no en controlador publicaciones
-    public function getPublicacionByProducto($id){
+    public function getPublicacionByProducto($id)
+    {
 
         $producto = Producto::find($id);
 
         return response()->json($producto->publicacion);
     }
 
-    public function validarID($id){
+    public function validarID($id)
+    {
 
-        $validator = Validator::make(['id' => $id],[
+        $validator = Validator::make(['id' => $id], [
             'id' => 'required|exists:productos,id',
         ], ['*.exists' => 'El Producto no se encuentra en el sistema']);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             throw new HttpResponseException(response()->json([
                 'success'   => false,
                 'message'   => 'Error en la validacion',
@@ -115,14 +120,42 @@ class ProductoController extends Controller
         }
     }
 
-    public function buscarProducto($criterio){
+    public function menuProductos()
+    {
+        $listaCategorias = Categoria::with(['subcategoria'])->get();
+        $menu = [];
+        
+        foreach ($listaCategorias as $categoria) {
 
-        $prods = Producto::where('nombreProducto', 'LIKE', '%'.$criterio.'%')
-                    ->orWhere('fabricante', 'LIKE', '%'.$criterio.'%')
-                    ->get();
+            $menuCategoria = new stdClass();
+            $menuCategoria->class = "pt-1 pb-1";
+            $menuCategoria->label = $categoria->nombre;
+            $menuCategoria->items = [];
+            foreach ($categoria->subcategoria as $subcategoria) {
 
-        foreach($prods as $prod){
-            $prod->imagen = "data:image/jpeg;base64,".base64_encode(Storage::get('imagenes/productos/cpu-i7.jpg'));
+                $menuSubCategoria = new stdClass();
+                $menuSubCategoria->class = "pt-1 pb-1";
+                $menuSubCategoria->label = $subcategoria->nombre;
+                array_push($menuCategoria->items, $menuSubCategoria);
+            }
+            array_push($menu, $menuCategoria);
+        }
+        //Modelo TAGS tiene muchos a muchos con categorias y productos(?)
+        //Un tag tiene muchos 
+        //https://stackoverflow.com/questions/41072571/add-tags-to-laravel-built-blog
+
+        return response()->json($menu);
+    }
+
+    public function buscarProducto($criterio)
+    {
+
+        $prods = Producto::where('nombreProducto', 'LIKE', '%' . $criterio . '%')
+            ->orWhere('fabricante', 'LIKE', '%' . $criterio . '%')
+            ->get();
+
+        foreach ($prods as $prod) {
+            $prod->imagen = "data:image/jpeg;base64," . base64_encode(Storage::get('imagenes/productos/cpu-i7.jpg'));
         }
 
         return response()->json($prods);

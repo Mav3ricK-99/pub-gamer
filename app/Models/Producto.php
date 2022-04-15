@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\ProductoIsCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +18,7 @@ class Producto extends Model
         'nombreProducto',
         'stock',
         'precio',
-        'categoria',
+        'subcategoria',
         'fabricante',
         'descripcion',
         'sku',
@@ -25,13 +26,22 @@ class Producto extends Model
         'path_imagen',
     ];
 
+    protected $dispatchesEvents = [
+        'created' => ProductoIsCreated::class,
+    ];
+
     public static function productoTieneStock(Producto $prod, $stock){
 
         return true ? Producto::find($prod->id)->stock >= $stock : false;
+    }
+
+    public function categoria(){
+        return $this->belongsTo(Subcategoria::class, 'categoria');
     }
 
     public function publicacion()
     {
         return $this->hasOne(Publicacion::class);
     }
+
 }

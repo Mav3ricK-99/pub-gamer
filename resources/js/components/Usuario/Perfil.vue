@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import Layout from "../Layouts/AppDashboardLayout"
+import Layout from "../Layouts/AppLayout.vue"
 export default {
    components: {
       Layout,

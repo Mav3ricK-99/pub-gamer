@@ -17,8 +17,7 @@ class Cart extends Model
         'producto_id',
         'cantidad'
     ];
-
-
+    
     protected $dispatchesEvents = [
         'saving' => \App\Events\UserCartUpdated::class,
         'updating' => \App\Events\UserCartUpdated::class,

@@ -69,4 +69,9 @@ class Kernel extends HttpKernel
         'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
         'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
     ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('passport:purge')->hourly();
+    }
 }

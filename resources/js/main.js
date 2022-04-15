@@ -1,16 +1,18 @@
 require('./bootstrap');
+
 import { createApp, ref, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import PrimeVue from 'primevue/config';
-import 'primevue/resources/themes/saga-blue/theme.css';
+import 'primevue/resources/themes/bootstrap4-light-blue/theme.css';
+import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
+
 import * as VueRouter from 'vue-router'
 import {BootstrapVue3} from 'bootstrap-vue-3'
 import { Inertia } from '@inertiajs/inertia'
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/js/bootstrap.js"
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),

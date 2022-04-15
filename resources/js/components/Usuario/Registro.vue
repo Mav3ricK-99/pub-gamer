@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-center">
     <div
-      class="col-lg-6 position-fixed d-flex rounded shadow"
+      class="col-lg-7 position-fixed d-flex rounded shadow"
       style="
         max-height: 750px;
         padding: 0;
@@ -17,71 +17,102 @@
           col-lg-7
           pt-3
           pb-3
-          ps-2
-          pe-3
           d-flex
           justify-content-evenly
           rounded
         "
       >
-        <b-form class="col-lg-11" @submit="registrarse">
-          <div class="d-flex justify-content-evenly mb-3">
-            <label for="inp" class="inp">
-              <input v-model="formulario.nombre" type="text" required id="inp" placeholder="&nbsp;"/>
+        <b-form class="col-lg-12 ps-2 pe-2" @submit="registrarse">
+          <div class="col-lg-12 d-flex mb-1">
+            <div class="col-lg-6">
+            <label for="inputNombre" class="inp d-flex justify-content-center">
+              <input
+                v-model="formulario.nombre"
+                type="text"
+                required
+                id="inputNombre"
+                placeholder="&nbsp;"
+              />
               <span class="label">Nombre</span>
               <span class="focus-bg"></span>
+              
             </label>
-             
-            <label for="inp" class="inp">
-              <input v-model="formulario.apellido" type="text" required id="inp" placeholder="&nbsp;"/>
+            <div class="divError mb-1 mt-1">{{ formulario.errors.nombre }}</div>
+            </div>
+            <div class="col-lg-6">
+            <label for="inputApellido" class="inp d-flex justify-content-center">
+              <input
+                v-model="formulario.apellido"
+                type="text"
+                required
+                id="inputApellido"
+                placeholder="&nbsp;"
+              />
               <span class="label">Apellido</span>
               <span class="focus-bg"></span>
             </label>
+            <div class="divError mb-1 mt-1">{{ formulario.errors.apellido }}</div>
+            </div>
           </div>
 
-          <div class="d-flex justify-content-center mb-3">
-
-            <label for="inp" class="inp mb-2 col-lg-11">
-              <input class="mb-1" v-model="formulario.email" type="email" required id="inp" placeholder="&nbsp;"/>
+          <div class="col-lg-12 d-flex mb-1">
+            <div class="col-lg-12 flex-column">
+            <label for="inputEmail" class="inp labelEmail d-flex justify-content-center">
+              <input
+                class="mb-1 align-items-center"
+                v-model="formulario.email"
+                type="email"
+                required
+                id="inputEmail"
+                placeholder="&nbsp;"
+              />
               <span class="label">Correo electronico</span>
               <span class="focus-bg"></span>
-              <span class="fcolor-naranja">Ej. federico1999g@gmail.com</span>
             </label>
-            
+              <span class="fcolor-naranja">Ej. federico1999g@gmail.com</span>
+              <div class="divError mb-1 mt-1">{{ formulario.errors.email }}</div>
+            </div>
           </div>
 
-          <div class="mb-3">
-            
-            <div class="d-flex flex-row justify-content-evenly mb-1">
-              <label for="inp" class="inp">
-                <input v-model="formulario.password" type="password" required id="inp" placeholder="&nbsp;"/>
+          <div class="col-lg-12 d-flex mb-1">
+            <div class="col-lg-6">
+              <label for="inputPass" class="inp d-flex justify-content-center">
+                <input
+                  v-model="formulario.password"
+                  type="password"
+                  required
+                  id="inputPass"
+                  autocomplete="on"
+                  placeholder="&nbsp;"
+                />
                 <span class="label">Contraseña</span>
                 <span class="focus-bg"></span>
               </label>
-
-              <label for="inp" class="inp">
-                <input v-model="formulario.password_confirmation" type="password" required id="inp" placeholder="&nbsp;"/>
+              <div class="divError mb-1 mt-1">{{ formulario.errors.password }}</div>
+            </div>
+            <div class="col-lg-6">
+              <label for="inputPassConf" class="inp d-flex justify-content-center">
+                <input
+                  v-model="formulario.password_confirmation"
+                  type="password"
+                  required
+                  id="inputPassConf"
+                  autocomplete="on"
+                  placeholder="&nbsp;"
+                />
                 <span class="label">Repetir contraseña</span>
                 <span class="focus-bg"></span>
               </label>
+            <span ref="s" class="fcolor-naranja"> Ej. Pub.Gamer1! </span>
             </div>
-            <span ref="s" class="fcolor-naranja ps-4">
-              Ej. Pub.Gamer1!
-            </span>
           </div>
 
-          <transition name="fade">
-            <div v-show="mostrarErrores" class="mb-3" style="transation: all 10s">
-              <ul class="list-group list-group-flush rounded">
-                <li :key="error.id" v-for="error of errores" class="errorLi list-group-item">
-                  {{ error }}
-                </li>
-              </ul>
-            </div>
-          </transition>
-
           <div class="d-flex justify-content-end">
-            <button type="submit" class="rounded pt-2 pb-2 ps-3 pe-3 botonFormulario">
+            <button
+              type="submit"
+              :disabled="formulario.processing"
+              class="rounded pt-2 pb-2 ps-3 pe-3 botonFormulario"
+            >
               <span>Continuar</span>
             </button>
           </div>
@@ -92,75 +123,43 @@
 </template>
 <script>
 import pixelArt from "../../../img/pixelart.jpg";
+import { useForm } from '@inertiajs/inertia-vue3'
+
 export default {
   data() {
     return {
-      formulario: {
+      formulario: useForm({
         email: "",
         nombre: "",
+        apellido: "",
         password: "",
         password_confirmation: "",
-      },
+      }),
       pixelArt: pixelArt,
-      mostrarErrores: false,
       errores: [],
     };
   },
   methods: {
-    registrarse: function (event) {
-      axios
-        .post("api/register", this.formulario)
-        .then((response) => {
-        
-          this.$emit('update:formularioRegistro', false)
-          localStorage.name = "XD";
-          this.$inertia.reload({ only: ['AppHeaderLayout'] });
-
-          this.formulario.email = '';
-          this.formulario.nombre = '';
-          this.formulario.apellido = '';
-          this.formulario.password= '';
-          this.formulario.password_confirmation = '';
-        })
-        .catch((error) => {
-          this.errores = []
-          let statusCode = error.response.status;
-          let mensajeErrores = error.response.data.errors;
-
-          if(statusCode >= 500){
-              alert("Hubo un problema al establecer la conexion con el servidor, por favor intente mas tarde.");
-          }else if(statusCode == 422){
-            this.mostrarErrores = true;
-           
-            Object.keys(mensajeErrores).forEach(fieldError => {
-              mensajeErrores[fieldError].forEach(el => {
-                this.errores.push(el);
-              })
-            });
-            
-          }else{
-            alert("Error desconocido - " + response.data);
-          }
-          console.log(error.response);
-        });
-    }
+    registrarse: function () {
+      this.formulario.post('/register', {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: () => {
+          this.formulario.reset();
+        },
+        onError: (errors) => {
+          this.formulario.reset('password', 'password_confirmation');
+          this.errores = errors;
+        },
+      });
+    },
   },
 };
 </script>
 <style scope lang="sass">
-
-.fade-enter-active, .fade-leave-active 
-  transition: opacity 3
-
-.fade-enter, .fade-leave-to
-  opacity: 0
-
-
-$naranjaClaro: #ff5722
-$naranjaPasivo: #fc602d
-
 .fcolor-naranja
   color: $naranjaPasivo
+  margin-left: 2rem
 
 .botonFormulario
   border: none
@@ -169,35 +168,40 @@ $naranjaPasivo: #fc602d
   background: #2c365d
   color: $naranjaClaro
   font-family: core-sans
-  transition: all 0.5s
+  margin-right:.7rem
+  margin-top: .7rem
 
-.botonFormulario span 
+.botonFormulario:disabled
+  transition: all 0
+  background: #333a54
+  color: gray
+
+.botonFormulario span
   cursor: pointer
   display: inline-block
   position: relative
   transition: 0.25s
 
-.errorLi
-  background: #2c365d
+.divError
+  min-height: 20px
   color: $naranjaPasivo
+  margin-left: 25px
+  font-size: 13px
 
-.botonFormulario span:after 
+.botonFormulario span:after
   content: '\00bb'
   position: absolute
   opacity: 0
   top: 0
   right: -20px
-  transition: 0.25s
+  transition: 0.15s
 
-
-.botonFormulario:hover span 
+.botonFormulario:hover span
   padding-right: 25px
 
-
-.botonFormulario:hover span:after 
+.botonFormulario:hover span:after
   opacity: 1
   right: 0
-
 
 .bg-cover
   width: 100%
@@ -207,14 +211,14 @@ $naranjaPasivo: #fc602d
 
 .inp
   position: relative
-  margin: auto
+  width: 100%
   border-radius: 3px
   overflow: hidden
 
   .label
     position: absolute
     top: 20px
-    left: 12px
+    left: 25px
     font-size: 16px
     color: rgba($naranjaPasivo,.5)
     font-weight: 500
@@ -235,16 +239,16 @@ $naranjaPasivo: #fc602d
     transform-origin: left
 
   input:-webkit-autofill,
-  input:-webkit-autofill:hover, 
-  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
   input:-webkit-autofill:active
-     -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out"
-     -webkit-transition-delay: 9999s
-  
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out"
+    -webkit-transition-delay: 9999s
+
   input
     -webkit-appearance: none
     appearance: none
-    width: 100%
+    width: 85%
     border: 0
     font-family: inherit
     padding: 16px 12px 0 12px
@@ -255,6 +259,9 @@ $naranjaPasivo: #fc602d
     box-shadow: inset 0 -1px 0 rgba($naranjaPasivo,.3)
     color: $naranjaPasivo
     transition: all .15s ease
+
+    &[type=email]
+        width: 92%
 
     &:hover
       background: rgba($naranjaPasivo,.04)
@@ -278,4 +285,9 @@ $naranjaPasivo: #fc602d
 
 .form-container
   background: #1d223b
+
+  
+.labelEmail
+  .label
+    left: 29px
 </style>

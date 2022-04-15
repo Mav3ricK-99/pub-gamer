@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const path = require('path');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -23,11 +23,16 @@ mix.webpackConfig({
         extensions: ['.tsx', '.ts', '.js', '.vue'],
         alias: {
             vue$: 'vue/dist/vue.esm-bundler.js',
+            '@': path.resolve('resources/js')
         }
     },
 });
 
 mix.js('resources/js/main.js', 'public/js')
-    .vue()
+    .vue({
+        globalStyles: { sass: ['resources/sass/app.sass'] },
+    })
     .postCss("resources/css/app.css", "public/css");
+
+
 

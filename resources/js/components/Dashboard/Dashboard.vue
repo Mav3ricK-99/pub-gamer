@@ -1,20 +1,10 @@
 <template>
-  <Layout></Layout>
-  <div>Dashboard content</div>
-  <div>Dashboard content</div>
-  <div>Dashboard content</div>
-  <div>Dashboard content</div>
-  <div>Dashboard content</div>
-  <div>Dashboard content</div>
-  <div>Dashboard content</div>
-  <div>Dashboard content</div>
+  Dashlol
 </template>
 
 <script>
-import Layout from "../Layouts/AppDashboardLayout"
+import Layout from "../Layouts/AppLayout.vue";
 export default {
-   components: {
-      Layout,
-    },
-}
+  layout: Layout,
+};
 </script>

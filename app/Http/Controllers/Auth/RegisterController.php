@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\RegisterRequest;
+
 use Inertia\Inertia;
 
 class RegisterController extends Controller
@@ -48,27 +47,22 @@ class RegisterController extends Controller
         return Inertia("Usuario/Registro");
     }*/
 
-    protected function validator(array $data)
+    public function register(RegisterRequest $request)
     {
-        return Validator::make($data, [
-            'nombre' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+        $data = $request->validated();
 
-    protected function create(array $data)
-    {
-        return User::create([
-            'nombre' => $data['nombre'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+        //Aca no se valida el apellido . . .
+        $data['nombre'] = "{$data['nombre']} {$request['apellido']}";
 
-    public function register(Request $request)
-    {
-        return Inertia::render('Dashboard/Dashboard');
+        $nuevoUsuario = new User($data);
+        $nuevoUsuario->save();
+
+        $this->guard()->login($nuevoUsuario);
+
+        return Inertia::render('Dashboard/Dashboard', ['usuario' => [
+            'nombre' => $nuevoUsuario->nombre,
+            'email' => $nuevoUsuario->email,
+        ]]);
     }
 
 }

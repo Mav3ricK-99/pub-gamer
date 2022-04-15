@@ -14,13 +14,14 @@ INERTIA.JS
 
 sacar headlesss
 
-Hacer tabla 'roles'
+ROLES -> Un usuario puede tener varios roles
 
 guardar un json de permisos (abilities)
 
 VOLVER A ASIGNAR VerifyCsrfToken para las RUTAS
 
-Primero migrate
+https://www.youtube.com/watch?v=Tfx_eRCEOyk
+
 
 -subirlo en docker??
 
@@ -28,8 +29,12 @@ Primero migrate
 
 (->ValidarID en modelo y tirar exception desde el controlador ? ? ??)
 
+Primero migrate
+
 y despues
 
+php artisan migrate:fresh
+php artisan db:seed
 php artisan passport:install --force
 
 UNSIGNEDINTEGER
@@ -87,3 +92,44 @@ COMPRADOR
 
     146{"id":1091189661,"nickname":"TETE9806143","password":"qatest515","site_status":"active","email":"test_user_4188743@testuser.com"}
 
+
+Iterar en cada producto
+    para cada producto fijarme que CATEGORIA es y chequear que si no existe en menu,
+        si no existe pushear a menu, si existe fijarme si existe SUBCATEGORIA,
+            si no existe pushear a menu, si existe pushear producto
+
+            foreach($listaCategorias as $categoria){
+            $categoria->label = $categoria->nombre;
+            $arraySubCategoria = [];
+            foreach($categoria->subcategoria as $subcategoria){
+                $menuSubCategoria = new stdClass();
+                $menuSubCategoria->label = $subcategoria->nombre;
+                $menuSubCategoria->items = [];
+                $prodsPorCatego = Producto::getProductosBySubcategoria($listaProductos, $subcategoria->nombre);
+                foreach($prodsPorCatego as $prod){
+
+                    $menuProducto = new stdClass();
+                    $menuProducto->label = $prod->nombreProducto;
+                    array_push($menuSubCategoria->items, $menuProducto);
+                }
+                array_push($arraySubCategoria, $menuSubCategoria);
+            }
+            $categoria->items = $arraySubCategoria;
+
+            $categoriaMenu = new StdClass();
+            $categoriaMenu->label = $categoria->label;
+            $categoriaMenu->items = $categoria->items;
+            array_push($menu, $categoriaMenu);
+        }
+
+USAR $store para usuario o  usar pages()
+
+fijarse si se eliminan las token cada 1 hora
+
+Tomar todas las Subcategorias (Pendrive, SSD), con ella with['categorias', 'productos'];
+Tomar todas las categorias
+
+listar todas las categorias
+    de todas las subcategorias tomar solo las que coincidan en la misma categoria (se puede hacer?) e iterar
+        *se obtiene todos los productos para una subcategoria (se arma el menu)
+    

@@ -16,15 +16,16 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            '*.email' => 'El :attribute debe ser un email valido!',
-            '*.required' => 'El campo :attribute es requerido!',
+            '*.email' => 'El :attribute debe ser un email valido',
+            '*.required' => 'El campo :attribute es requerido',
+            '*.exists' => 'Alguno de los datos son invalidos',
         ];
     }
 
     public function rules()
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required',
         ];
     }

@@ -23,7 +23,6 @@ class EventServiceProvider extends ServiceProvider
         UserCartUpdated::class => [
             UpdateCartInSession::class,
         ],
-
     ];
 
     /**
