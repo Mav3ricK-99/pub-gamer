@@ -2,3 +2,8 @@
     font-family: "core-sans";
     src: url(/fonts/Fontspring-coresansar45.otf?50f153eb34793c39933e195cb33eb2da);
 }
+
+@font-face {
+    font-family: "Lato";
+    src: url(/fonts/Lato-Regular.ttf?9d883d540ee2b4de80247a522dd59656);
+}

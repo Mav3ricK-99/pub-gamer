@@ -1,24 +1,37 @@
 <template>
-  <Splitbutton class="navButton" label="Productos" :model="this.menu" />
+  <Splitbutton label="Productos" :model="this.menu" />
 </template>
 
 <script>
 import Splitbutton from "primevue/splitbutton";
 
 export default {
-  created() {
-    /*window.Echo.channel("producto").listen(".created", (data) => {
+  mounted() {
+    window.Echo.channel("producto").listen(".created", (data) => {
       //console.log(data);
       this.agregarProductoTabla(data.producto);
-    });*/
-    this.getTablaProductos();
+    });
   },
   data() {
     return {
       menu: [
         {
-          icon: "pi pi-spin pi-spinner",
-          class: "d-flex justify-content-center",
+          class: "pt-1 pb-1",
+          label: "Almacenamiento",
+          items: [
+            {
+              class: "pt-1 pb-1",
+              label: "Pendrive",
+            },
+            {
+              class: "pt-1 pb-1",
+              label: "Disco Rigido",
+            },
+            {
+              class: "pt-1 pb-1",
+              label: "Disco en estado solido",
+            },
+          ],
         },
       ],
     };
@@ -26,34 +39,32 @@ export default {
   components: {
     Splitbutton,
   },
-  methods: {
-    getTablaProductos: function () {
-      axios.get("api/menu_productos/").then((response) => {
-        this.menu = response.data;
-      });
-    },/*
-    agregarProductoTabla: function (producto) {
-      let nombreCategoria = producto.subcategoria.categoria.nombre;
-      let nombreSubCategoria = producto.subcategoria.nombre;
-
-      this.menu.find((categoria) => {
-        if (categoria.label === nombreCategoria) {
-          categoria.items.find((subcategoria) => {
-            if (subcategoria.label === nombreSubCategoria) {
-              subcategoria.items.push({
-                label: producto.nombreProducto,
-                to: "producto/" + producto.id,
-              });
-            }
-          });
-        }
-      });
-    },*/
-  },
 };
 </script>
 
 <style lang="sass" scope>
+.p-splitbutton
+  border: none
+  outline: none
+  background: $azulNavOscuro
+
+.p-button
+  background: $azulNavOscuro
+  color: $colorNav
+  font-family: core-sans
+  font-size: $fsizeNav
+  line-height: 2rem
+  border: none
+
+.p-button:enabled:hover
+  background: $azulNavOscuro
+  color: $colorNav
+  border: none
+
+.p-button
+  &:focus
+    box-shadow: none
+
 .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link
   background: transparent
 

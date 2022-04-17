@@ -22,6 +22,4 @@ Route::apiResource('/permiso', 'App\Http\Controllers\API\PermisoController')->mi
 
 Route::apiResource('/carrito', 'App\Http\Controllers\API\CartController')->middleware(['auth:api']);
 
-
-
 //endpoint Quitar permiso a ROL

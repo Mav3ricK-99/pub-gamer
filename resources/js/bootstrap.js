@@ -1,5 +1,6 @@
 window._ = require('lodash');
 window.$ = window.jQuery = require('jquery')
+
 try {
     require('bootstrap');
 } catch (e) { }
@@ -14,7 +15,7 @@ window.Pusher = require("pusher-js");
 //Pusher.logToConsole = true;
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Echo = new Echo({
     broadcaster: process.env.MIX_BROADCAST_DRIVER,

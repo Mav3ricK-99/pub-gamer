@@ -124,12 +124,12 @@ Iterar en cada producto
 
 USAR $store para usuario o  usar pages()
 
-fijarse si se eliminan las token cada 1 hora
+Usar Inertia::show en web.php
 
-Tomar todas las Subcategorias (Pendrive, SSD), con ella with['categorias', 'productos'];
-Tomar todas las categorias
+Libreria Bootstrap-Icons ocupa 1mb por solamente el uso de un icono
 
-listar todas las categorias
-    de todas las subcategorias tomar solo las que coincidan en la misma categoria (se puede hacer?) e iterar
-        *se obtiene todos los productos para una subcategoria (se arma el menu)
-    
+>En la vista publicacion mostrar la comparacion con los otros con el mismo TAG
+>Comentarios del producto
+>Reseñas del producto
+
+>Dashboard mostrar Slider + los ultimos productos comprados, las rebajas, las ultimas reseñas

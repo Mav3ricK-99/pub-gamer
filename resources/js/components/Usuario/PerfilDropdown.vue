@@ -6,7 +6,7 @@
       data-bs-toggle="dropdown"
       data-bs-display="static"
       aria-expanded="false"
-      style="width:400px"
+      style="width:600px"
     ></b-avatar>
     
     <ul class="dropdown-menu dropdown-menu-center">
@@ -19,15 +19,19 @@
       <li><a class="dropdown-item" href="#">Lo mas vendido</a></li>
       <li><a class="dropdown-item" href="#">Favoritos</a></li>
       <li><hr class="dropdown-divider" /></li>
-      <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
+      <li><Link class="dropdown-item" href="/logout" preserve-scroll>Cerrar sesion</Link></li>
     </ul>
   </div>
 </template>
 
 <script>
 import { nextTick } from 'vue'
+import { Link } from '@inertiajs/inertia-vue3'
 
 export default {
+  components: {
+    Link
+  },
   created: function () {
     nextTick(function () {
       $(".dropdown").on("show.bs.dropdown", function () {

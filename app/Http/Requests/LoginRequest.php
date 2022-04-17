@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Inertia\Inertia;
 
 class LoginRequest extends FormRequest
 {
@@ -32,10 +32,6 @@ class LoginRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Error en la validacion',
-            'data'      => $validator->errors()
-        ]));
+        Inertia::render('Dashboard/Dasboard', ['errors' => $validator->errors()]);
     }
 }

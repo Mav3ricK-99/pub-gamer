@@ -40,17 +40,13 @@ class LoginController extends Controller
         if (Auth::attempt($data)) {
 
             $usuario = User::with('roles.permisos')->find(Auth::user()->id);
-            $token = Auth::user()->createToken("LeTokken", $usuario->permisos)->accessToken;
+            
+            $token = Auth::user()->createToken("PubGamer")->accessToken;
 
-            return Inertia::render('Dashboard/Dashboard', ["token" => $token]);
+            return redirect()->back()->with("token", $token);
         }
 
-        //Poner lo de abajo en LoginRequest' ?? 
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Error en la validacion',
-            'data'      => "{\"email:[\"Alguno de los datos son invalidos\"]}"
-        ]));
+        return redirect()->back()->withErrors(["email" => "Alguno de los datos son invalidos"]);
     }
 
     public function logout()
@@ -60,6 +56,6 @@ class LoginController extends Controller
             Auth::logout();
         }
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->back();
     }
 }

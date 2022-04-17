@@ -10,7 +10,7 @@
           flex-fill
           align-items-center
         "
-        style="width: 40%"
+        style="width: 30%"
       >
         <!-- Habria que hacer el nav de 0 con column, esto de arriba va a romper -!-->
         <MenuProductos/>
@@ -29,7 +29,7 @@
       >
         <InputBusqueda />
         <div
-          v-if="this.usuario"
+          v-if="this.isLogueado"
           class="
             col-lg-2
             d-flex
@@ -42,14 +42,8 @@
           <PerfilDropDown />
         </div>
         <div v-else class="d-flex flex-column align-items-center">
-          <span class="ctrlSesion text-white fs-5"> Iniciar sesion </span>
-          <hr class="m-0 w-100 text-white" />
-          <span
-            v-on:click="toggleRegistro()"
-            class="ctrlSesion text-white fs-5"
-          >
-            Registrarse
-          </span>
+          <button v-on:click="setFormulario('formularioRegistro')" ref="registro" class="buttonReg mb-1">Registrarse</button>
+          <span class="spanInicioSesion">¿Ya formas parte del Pub? <span role='button' ref="inicio" v-on:click="setFormulario('formularioIngreso')">Inicia sesion</span></span>
         </div>
       </div>
     </div>
@@ -63,40 +57,28 @@ import notification from "../../logos/notification.png";
 import InputBusqueda from "./NavComponents/InputBusqueda.vue";
 import MenuProductos from "./NavComponents/MenuProductos.vue";
 import PerfilDropDown from "./Usuario/PerfilDropdown.vue";
-import { onUpdated } from "vue";
 
-import { computed } from "vue";
-import { usePage } from "@inertiajs/inertia-vue3";
-
-let productos;
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   setup() {
-    onUpdated(() => {
-      //When te logueas
-      //console.log(usePage().props.value.usuario);
-    });
-    const usuario = computed(() => usePage().props.value.usuario);
-    return { usuario };
-  },
-  props: {
-    formularioRegistro: {
-      type: Boolean,
-    },
+    const store = useStore()
+    return {
+
+      usuario: computed(() => store.state.usuario),
+      isLogueado: computed(() => store.state.isLogueado),
+
+      setFormulario: (formulario) => store.commit("setFormulario", formulario),
+    }
   },
   data() {
     return {
       logo: logo,
       notif: notification,
-      productos: [],
     };
   },
   name: "Header",
-  methods: {
-    toggleRegistro: function () {
-      this.$emit("mostrarRegistro", !this.formularioRegistro);
-    },
-  },
   components: {
     Link,
     InputBusqueda,
@@ -109,39 +91,42 @@ export default {
 <style lang="sass" scoped>
 .navContent
   width: 70%
+
 .navBox
-  background: #2c365d
-.ctrlSesion
+  background: $azulNav
+
+.spanInicioSesion
+  font-family: Lato
+  font-size: .85rem
+  color: $colorNav
+  cursor: default
+
+.buttonReg
+  font-size: $fsizeNav
   font-family: core-sans
+  background: $azulNavOscuro
+  color: $colorNav
+  padding-left: 1.3rem
+  padding-right: 1.3rem
+  padding-top: 0.45rem
+  padding-bottom: 0.45rem
+  border: none
+  outline: none
   cursor: pointer
+  border-radius: $bradiusNav
+
 .navButton
   border: none
   outline: none
-  background: #272e4f
-  color: #f2f2f0
+  background: $azulNavOscuro
+  color: $colorNav
   font-family: core-sans
-  font-size: 1.125rem
+  font-size: $fsizeNav
   line-height: 1.75rem
   padding-left: 1.3rem
   padding-right: 1.3rem
   padding-top: 0.45rem
   padding-bottom: 0.45rem
-  border-radius: 0.4rem
-
-::v-deep(.navButton)
-  .p-button
-    border: none
-    outline: none
-    background: #272e4f
-    color: #f2f2f0
-    font-family: core-sans
-    font-size: 1.125rem
-    line-height: 1.75rem
-    padding-left: 1rem
-    padding-right: 1rem
-  .p-button
-    &:focus
-      box-shadow: none
-
+  border-radius: $bradiusNav
 </style>
 

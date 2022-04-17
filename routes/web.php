@@ -11,7 +11,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', [DashboardController::class, 'show'])->name('dashboard');
+Route::inertia('/', 'Dashboard/Dashboard');
 
 Route::group(['prefix' => 'publicacion' /*,'middleware' => ['auth:api']]))*/], function () {
 
@@ -42,6 +42,8 @@ Route::group(['prefix' => 'busqueda'], function () {
 });
 
 Route::post('/ingresar', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/ingresar', [LoginController::class, 'show'])->name("login");
 
-Route::get('/login', [LoginController::class, 'show'])->name("login");
+Route::get('/logout', [LoginController::class, 'logout']);
+
+Route::post('/register', [RegisterController::class, 'register']);

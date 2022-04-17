@@ -1,5 +1,4 @@
 <template>
-  <Layout></Layout>
   <div>PPPEEEERFILLL</div>
 </template>
 

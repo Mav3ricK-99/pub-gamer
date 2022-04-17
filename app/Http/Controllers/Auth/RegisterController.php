@@ -48,7 +48,7 @@ class RegisterController extends Controller
     }*/
 
     public function register(RegisterRequest $request)
-    {
+    { 
         $data = $request->validated();
 
         //Aca no se valida el apellido . . .
@@ -59,6 +59,7 @@ class RegisterController extends Controller
 
         $this->guard()->login($nuevoUsuario);
 
+        //Abajo va Redirect
         return Inertia::render('Dashboard/Dashboard', ['usuario' => [
             'nombre' => $nuevoUsuario->nombre,
             'email' => $nuevoUsuario->email,
