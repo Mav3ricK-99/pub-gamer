@@ -3,15 +3,6 @@
 //5031 7557 3453 0604
 //11/25
 
-
-INERTIA.JS
-INERTIA.JS
-INERTIA.JS
-INERTIA.JS
-INERTIA.JS
-
-INERTIA.JS
-
 sacar headlesss
 
 ROLES -> Un usuario puede tener varios roles
@@ -35,7 +26,16 @@ y despues
 
 php artisan migrate:fresh
 php artisan db:seed
-php artisan passport:install --force
+php artisan passport:client --personal
+PubGamer
+
+copiar el primer par en .env y luego hacer esto:
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan config:cache
+php artisan route:cache
+php artisan optimize
 
 UNSIGNEDINTEGER
 
@@ -133,3 +133,8 @@ Libreria Bootstrap-Icons ocupa 1mb por solamente el uso de un icono
 >Reseñas del producto
 
 >Dashboard mostrar Slider + los ultimos productos comprados, las rebajas, las ultimas reseñas
+
+poner varios imagenes en el formulario registro y que aparezcan random
+
+perdi la batalla contra inertia; la unica solucion para que funcione con CSRF es intentar que funcione con axios
+

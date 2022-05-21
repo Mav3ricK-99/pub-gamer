@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center noselect">
     <hr class="w-25" size="4" /><span class="dot"></span>
     <h4 class="tituloForm"><slot/></h4>
     <span class="dot"></span><hr class="w-25" size="4"/>
@@ -8,15 +8,18 @@
 
 <style scope lang="sass">
 .tituloForm
-    color: $colorNav
+    color: white
+    font-size: 30px
     font-family: Lato
     margin-left: 1rem
     margin-right: 1rem
+    text-transform: uppercase
+    letter-spacing: 2px
 
 hr
-    color: $colorNav
+    color: $formInputColor
     align-self: center
-    opacity: .55
+    opacity: .90
 
 .dot 
   height: 12px

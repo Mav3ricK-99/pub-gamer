@@ -6,9 +6,9 @@ use App\Http\Controllers\API\CartController;
 
 Route::get('/menu_productos',[ProductoController::class, 'menuProductos']);
 
-Route::group(['prefix' => 'producto', 'middleware' => ['auth:api']], function () {
+Route::group(['prefix' => 'producto'/*, 'middleware' => ['auth:api']*/], function () {
 
-    Route::get('/producto',[ProductoController::class, 'index']);
+    Route::get('/',[ProductoController::class, 'index']);
     Route::post('/',[ProductoController::class, 'store'])->middleware('scopes:altaProducto');
     Route::get('/{id}',[ProductoController::class, 'show']);
     Route::put('/{id}',[ProductoController::class, 'update'])->middleware('scopes:updateProducto');

@@ -46,19 +46,49 @@ export default {
 .p-splitbutton
   border: none
   outline: none
-  background: $azulNavOscuro
+  background: $navButtonBackgroundDarker
 
 .p-button
-  background: $azulNavOscuro
-  color: $colorNav
+  background: $navButtonBackgroundDarker
+  color: $navColor
   font-family: core-sans
-  font-size: $fsizeNav
+  font-size: $navButonFontsize
   line-height: 2rem
   border: none
 
+.p-button
+  text-align: center
+  text-transform: uppercase
+  cursor: pointer
+  font-size: 17px
+  letter-spacing: 1.5px
+  position: relative
+  transition-duration: 0.4s
+  overflow: hidden
+  -webkit-box-shadow: $navButonBoxShadow
+  box-shadow: $navButonBoxShadow
+  border: none
+  outline: none
+  background: $navButtonBackground
+  color: $navColor
+  font-family: core-sans
+  font-size: $navButonFontsize
+  line-height: 1.75rem
+  padding-left: 1.4rem
+  padding-right: 1.4rem
+  padding-top: 0.5rem
+  padding-bottom: 0.5rem
+  border-radius: $navButonBorderRadius
+
+  &:hover
+    background: $navButtonBackgroundDarker
+
+  &:focus
+    outline: 0
+
 .p-button:enabled:hover
-  background: $azulNavOscuro
-  color: $colorNav
+  background: $navButtonBackgroundDarker
+  color: $navColor
   border: none
 
 .p-button

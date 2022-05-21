@@ -1,10 +1,10 @@
 <template>
-  <b-form class="col-lg-7 ps-4 pe-4" @submit="ingresar">
-    <TituloFormulario>Ingreso</TituloFormulario>
+  <b-form @submit="ingresar">
+    <TituloFormulario class="mb-3">Ingreso</TituloFormulario>
 
     <div class="mt-3">
-      <div class="col-lg-11">
-        <div class="col-lg-12 flex-column">
+      <div class="col-lg-12 d-flex justify-content-center mb-1">
+        <div class="col-lg-11 flex-column">
           <label
             for="inputEmail"
             class="inp labelEmail d-flex justify-content-center"
@@ -26,33 +26,36 @@
           </div>
         </div>
       </div>
-
-      <div class="col-lg-11">
-        <label for="inputPass" class="inp d-flex justify-content-center">
-          <input
-            v-model="formulario.password"
-            type="password"
-            required
-            id="inputPass"
-            autocomplete="off"
-            placeholder="&nbsp;"
-          />
-          <span class="label">Contraseña</span>
-          <span class="focus-bg"></span>
-        </label>
-        <div class="divError mb-1 mt-1">
-          {{ formulario.errors.password }}
+      <div class="col-lg-12 d-flex justify-content-center mb-1">
+        <div class="col-lg-11">
+          <label for="inputPass" class="inp d-flex justify-content-center">
+            <input
+              v-model="formulario.password"
+              type="password"
+              required
+              id="inputPass"
+              autocomplete="off"
+              placeholder="&nbsp;"
+            />
+            <span class="label">Contraseña</span>
+            <span class="focus-bg"></span>
+          </label>
+          <div class="divError mb-1 mt-1">
+            {{ formulario.errors.password }}
+          </div>
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-end">
-      <button
-        type="submit"
-        :disabled="formulario.processing"
-        class="rounded pt-2 pb-2 ps-3 pe-3 botonFormulario"
-      >
-        <span>Ingresar</span>
-      </button>
+    <div class="col-lg-12">
+      <div class="d-flex justify-content-end">
+        <button
+          type="submit"
+          :disabled="formulario.processing"
+          class="rounded pt-2 pb-2 ps-3 pe-3 botonFormulario"
+        >
+          <span>Ingresar</span>
+        </button>
+      </div>
     </div>
   </b-form>
 </template>
@@ -61,13 +64,14 @@
 import TituloFormulario from "@/components/FormComponents/TituloFormulario.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
-import { useStore } from 'vuex'
+import { useStore } from "vuex";
 export default {
   setup() {
-    const store = useStore()
+    const store = useStore();
     return {
-      setMostrarFormulario: (value) => store.commit("setMostrarFormulario", value),
-    }
+      setMostrarFormulario: (value) =>
+        store.commit("setMostrarFormulario", value),
+    };
   },
   data() {
     return {
@@ -85,14 +89,14 @@ export default {
         preserveScroll: true,
         onSuccess: () => {
           this.formulario.reset();
-          this.setMostrarFormulario(false)
+          this.setMostrarFormulario(false);
         },
         onError: (errors) => {
           this.formulario.reset();
           this.errores = errors;
         },
       });
-    }
+    },
   },
   components: {
     TituloFormulario,
@@ -102,22 +106,27 @@ export default {
 
 <style lang="sass" scoped>
 .fcolor-naranja
-  color: $naranjaPasivo
-  margin-left: 2rem
+  color: $formInputColor
+  font-size: 17px
 
 .botonFormulario
   border: none
   outline: none
-  font-size: 17px
-  background: #2c365d
-  color: $naranjaClaro
+  font-size: 19px
+  background: #19315A
+  color: #FF773D
   font-family: core-sans
-  margin-right: .7rem
   margin-top: .7rem
+  margin-right: 1.5rem
+  transition: all 1s
+
+  &:hover
+    color: $formInputColor
+    background: $backgroundBotonForm
 
 .botonFormulario:disabled
-  transition: all 0
-  background: #333a54
+  transition: all 0s
+  background: $formInputDisabledBackground
   color: gray
 
 .botonFormulario span
@@ -128,7 +137,7 @@ export default {
 
 .divError
   min-height: 20px
-  color: $naranjaPasivo
+  color: $formInputColor
   margin-left: 25px
   font-size: 13px
 
@@ -155,10 +164,10 @@ export default {
 
   .label
     position: absolute
-    top: 20px
-    left: 25px
-    font-size: 16px
-    color: rgba($naranjaPasivo,.5)
+    top: 17px
+    left: 14px
+    font-size: 17px
+    color: #FF773D
     font-weight: 500
     transform-origin: 0 0
     transform: translate3d(0,0,0)
@@ -171,7 +180,7 @@ export default {
     left: 0
     width: 100%
     height: 100%
-    background: rgba($naranjaPasivo,.05)
+    background: rgba($formInputColor,.07)
     z-index: -1
     transform: scaleX(0)
     transform-origin: left
@@ -191,28 +200,28 @@ export default {
     font-family: inherit
     padding: 16px 12px 0 12px
     height: 56px
-    font-size: 16px
+    font-size: 18px
     font-weight: 400
-    background: #1d223b
-    box-shadow: inset 0 -1px 0 rgba($naranjaPasivo,.3)
-    color: $naranjaPasivo
+    background: $backgroundInputForm
+    border-box: $navButonBorderRadius
+    box-shadow: inset 0 -1px 0 rgba($formInputColor,.4)
+    color: $formInputColor
     transition: all .15s ease
 
     &:hover
-      background: rgba($naranjaPasivo,.04)
-      box-shadow: inset 0 -1px 0 rgba($naranjaPasivo,.5)
+      box-shadow: inset 0 -1px 0 rgba($formInputColor,.5)
 
     &:not(:placeholder-shown)
       + .label
-        color: rgba($naranjaPasivo,.5)
+        color: #FF773D
         transform: translate3d(0,-12px,0) scale(.75)
 
     &:focus
-      background: rgba($naranjaPasivo,.05)
+      background: rgba($formInputColor,.05)
       outline: none
-      box-shadow: inset 0 -2px 0 $naranjaClaro
+      box-shadow: inset 0 -2px 0 $formInputColor
       + .label
-        color: $naranjaClaro
+        color: $formInputColor
         transform: translate3d(0,-12px,0) scale(.75)
         + .focus-bg
           transform: scaleX(1)
@@ -220,5 +229,5 @@ export default {
 
 .labelEmail
   .label
-    left: 29px
+    left: 14px
 </style>

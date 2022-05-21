@@ -1,18 +1,17 @@
 <template>
-  <div class="navBox w-100 d-flex flex-row justify-content-center shadow-sm">
-    <div class="w-75 d-flex flex-row justify-content-evenly align-items-center">
+  <div class="navBox sticky-top">
+    <div class="col-10 d-flex flex-row justify-content-around align-items-center">
       <img :src="logo" width="425" />
       <div
         class="
           d-flex
-          flex-row
-          justify-content-evenly
-          flex-fill
+          justify-content-around
           align-items-center
+          flex-fill
+          botones
         "
-        style="width: 30%"
+        
       >
-        <!-- Habria que hacer el nav de 0 con column, esto de arriba va a romper -!-->
         <MenuProductos/>
         <Link href="./usuario">
           <button class="navButton">Ofertas</button>
@@ -22,11 +21,7 @@
           <button class="navButton">Ayuda</button>
         </Link>
       </div>
-
-      <div
-        class="d-flex flex-row justify-content-end align-items-center"
-        style="width: 40%"
-      >
+      <div class="d-flex align-items-center">
         <InputBusqueda />
         <div
           v-if="this.isLogueado"
@@ -89,44 +84,38 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.botones
+  max-width: 600px
+
 .navContent
-  width: 70%
+  width: 70vw
 
 .navBox
-  background: $azulNav
+  width: 100%
+  height: 110px
+  background: $navBackground
+  display: flex
+  justify-content: center
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,0.25)!important
 
 .spanInicioSesion
   font-family: Lato
-  font-size: .85rem
-  color: $colorNav
+  font-size: .95rem
+  color: $navColor
   cursor: default
 
 .buttonReg
-  font-size: $fsizeNav
+  font-size: $navButonFontsize
   font-family: core-sans
-  background: $azulNavOscuro
-  color: $colorNav
-  padding-left: 1.3rem
-  padding-right: 1.3rem
+  background: $navButtonBackground
+  color: $navColor
+  padding-left: 1.6rem
+  padding-right: 1.6rem
   padding-top: 0.45rem
   padding-bottom: 0.45rem
   border: none
   outline: none
   cursor: pointer
-  border-radius: $bradiusNav
-
-.navButton
-  border: none
-  outline: none
-  background: $azulNavOscuro
-  color: $colorNav
-  font-family: core-sans
-  font-size: $fsizeNav
-  line-height: 1.75rem
-  padding-left: 1.3rem
-  padding-right: 1.3rem
-  padding-top: 0.45rem
-  padding-bottom: 0.45rem
-  border-radius: $bradiusNav
+  border-radius: $navButonBorderRadius
 </style>
 

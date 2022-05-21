@@ -16,7 +16,6 @@ window.Pusher = require("pusher-js");
 window.axios = require('axios');
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
 window.Echo = new Echo({
     broadcaster: process.env.MIX_BROADCAST_DRIVER,
     key: process.env.MIX_PUSHER_APP_KEY,

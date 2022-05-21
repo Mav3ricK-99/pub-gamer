@@ -1,16 +1,92 @@
-// - Nav
-$azulNav: #2c365d
-$azulNavOscuro: #272e4f
-$colorNav: #f2f2f0
+$primaryColor: var(--var-primaryColor)
+$primaryColorLighter: var(--var-primaryColorLighter)
+$secondaryColor: var(--var-secondaryColor)
+  
+/* - Nav */
+$navColor: var(--var-navColor)
+$navBackground: var(--var-navBackground)
 
-$bradiusNav: 4px
-$fsizeNav: 1.15rem
+/* - Nav buttons */
+$navButtonBackground: var(--var-navButtonBackground)
+$navButtonBackgroundDarker: var(--var-navButtonBackgroundDarker)
+$navButonBoxShadow: var(--var-navButonBoxShadow)
+$navButonFocusBackground: var(--var-navButonFocusBackground)
+$navButonBorderRadius: 2.5px
+$navButonFontsize: 1.15rem
 
-// - Forms, etc
-$naranjaClaro: #ff5722
-$naranjaPasivo: #fc602d
-$azulForm: #1d223b
+/* - Nav input */
+$busquedaNavBackground: var(--var-busquedaNavBackground)
+$busquedaNavNubeBackground: var(--var-busquedaNavNubeBackground)
+$busquedaNavLupaHover: var(--var-busquedaNavLupaHover)
+$busquedaNavInputBackground: var(--var-busquedaNavInputBackground)
+
+/* - Forms, etc */
+$backgroundInputForm: var(--var-backgroundInputForm)
+$backgroundBotonForm: var(--var-backgroundBotonForm)
+$background: var(--var-background)
+$formularioBackground: var(--var-formularioBackground)
+$formInputColor: var(--var-formInputColor)
+$formInputDisabledBackground : var(--var-formInputDisabledBackground)
 
 
+.navButton
+  text-align: center
+  text-transform: uppercase
+  cursor: pointer
+  letter-spacing: 1.2px
+  position: relative
+  transition-duration: 0.4s
+  overflow: hidden
+  border: none
+  outline: none
+  background: $navButtonBackground
+  color: $navColor
+  font-family: core-sans
+  font-size: $navButonFontsize
+  line-height: 1.70rem
+  padding-left: 1.2rem
+  padding-right: 1.2rem
+  padding-top: 0.4rem
+  padding-bottom: 0.4rem
+  border-radius: $navButonBorderRadius
+  -webkit-box-shadow: $navButonBoxShadow
+  box-shadow: $navButonBoxShadow
 
+  &:hover
+    background: $navButtonBackgroundDarker
 
+  &:after
+    content: ""
+    background: $navButonFocusBackground
+    display: block
+    position: absolute
+    padding-top: 300%
+    padding-left: 350%
+    margin-left: -25px !important
+    margin-top: -120%
+    opacity: 0
+    transition: all 0.8s
+
+  &:active:after
+    padding: 0
+    margin: 0
+    opacity: 1
+    transition: 0s
+
+  &:focus
+    outline: 0
+
+.noselect
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+@mixin transition($in)
+    transition: $in
+    -webkit-transition: $in
+    -moz-transition: $in
+    -o-transition: $in
+    -ms-transition: $in

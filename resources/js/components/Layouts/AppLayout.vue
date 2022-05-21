@@ -1,12 +1,8 @@
 <template>
-  <Header ref="header"/>
+  <Header ref="header" />
   <Transition>
-    <ControlFormSesion
-      v-if="mostrarFormulario"
-      v-click-outside="cerrarModal"
-    />
+    <ControlFormSesion v-if="mostrarFormulario" v-click-outside="cerrarModal" />
   </Transition>
-
   <slot />
 </template>
 
@@ -16,40 +12,46 @@ import ControlFormSesion from "../Usuario/ControlFormSesion.vue";
 
 import vClickOutside from "click-outside-vue3";
 
-import { useStore } from 'vuex'
-import { computed, onMounted, onUpdated } from 'vue'
+import { useStore } from "vuex";
+import { computed, onMounted, onUpdated } from "vue";
 
 export default {
   setup() {
-    const store = useStore()
+    const store = useStore();
 
     onMounted(() => {
-        store.commit('setUsuario');
-    })
+      store.commit("setUsuario");
+    });
     onUpdated(() => {
-        store.commit('setUsuario');
-    })
+      store.commit("setUsuario");
+    });
 
     return {
       mostrarFormulario: computed(() => store.state.mostrarFormulario),
       formulario: computed(() => store.state.formulario),
       usuario: computed(() => store.state.usuario),
 
-      setMostrarFormulario: (value) => store.commit("setMostrarFormulario", value),
+      switchCssTheme: (value) =>
+        store.commit("switchCssTheme", value),
+      setMostrarFormulario: (value) =>
+        store.commit("setMostrarFormulario", value),
       setFormulario: (formulario) => store.commit("setFormulario", formulario),
-    }
+    };
   },
   directives: {
     clickOutside: vClickOutside.directive,
   },
+  mounted() {
+    this.switchCssTheme("lightTheme");
+  },
   methods: {
     cerrarModal: function (event) {
-      let botonRegistrarse = this.$refs['header'].$refs['registro'];
-      let botonInicio = this.$refs['header'].$refs['inicio'];
-      if(event.target != botonRegistrarse && event.target != botonInicio){
-        this.setMostrarFormulario(false)
+      let botonRegistrarse = this.$refs["header"].$refs["registro"];
+      let botonInicio = this.$refs["header"].$refs["inicio"];
+      if (event.target != botonRegistrarse && event.target != botonInicio) {
+        this.setMostrarFormulario(false);
       }
-    }
+    },
   },
   components: {
     Header,
