@@ -31,8 +31,6 @@ export default {
       formulario: computed(() => store.state.formulario),
       usuario: computed(() => store.state.usuario),
 
-      switchCssTheme: (value) =>
-        store.commit("switchCssTheme", value),
       setMostrarFormulario: (value) =>
         store.commit("setMostrarFormulario", value),
       setFormulario: (formulario) => store.commit("setFormulario", formulario),
@@ -40,9 +38,6 @@ export default {
   },
   directives: {
     clickOutside: vClickOutside.directive,
-  },
-  mounted() {
-    this.switchCssTheme("lightTheme");
   },
   methods: {
     cerrarModal: function (event) {

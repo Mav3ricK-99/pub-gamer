@@ -83,13 +83,13 @@ export default {
 <style lang="sass" scoped>
 .card-prod
     border-radius: 4px
-    background: $navButtonBackgroundDarker
+    background: $backgroundCard
 
 .tituloCard
-    color: #FFFFFF
+    color: $primaryColorLighter
     font-size: 41px
     text-align: center
-    text-shadow: 1px 3px 6px rgba(59,17,213,0.60)
+    text-shadow: 1px 3px 6px rgba(0,24,130,0.30)
     font-family: "Lato"
 
 .imagen-card-prod
@@ -102,7 +102,7 @@ export default {
     text-align: center
 
 .spanPrecio
-    color: #E2E2E2
+    color: $secondaryColorLigther
     text-shadow: 1px 2.5px 5px rgba(255,255,255,0.1)
 
 .descProducto
@@ -119,7 +119,7 @@ export default {
     padding: 5px
 
 .add-icon
-    color: $primaryColor!important
+    color: $primaryColorLighter!important
     font-size: 2.5rem!important
 
 .botonComprar
@@ -134,7 +134,7 @@ export default {
     overflow: hidden
 
 .spanBotonCardProd
-    color: white
+    color: $primaryColorLighter
     letter-spacing: 2px
     font-size: 25px
     font-family: "Lato"
@@ -156,7 +156,7 @@ export default {
     border-bottom-right-radius: 4px
     @include transition(all 0.5s ease)
 
-@media (min-width: 768px) 
+@media (min-width: 768px)
         .card-prod
             margin-bottom: 3rem
             max-width: 300px

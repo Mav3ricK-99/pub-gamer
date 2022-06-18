@@ -1,7 +1,7 @@
 <template>
   <div class="navBox sticky-top">
     <div class="col-10 d-flex flex-row justify-content-around align-items-center">
-      <img :src="logo" width="425" />
+      <img :src="logo" />
       <div
         class="
           d-flex
@@ -10,7 +10,7 @@
           flex-fill
           botones
         "
-        
+
       >
         <MenuProductos/>
         <Link href="./usuario">
@@ -92,7 +92,7 @@ export default {
 
 .navBox
   width: 100%
-  height: 110px
+  height: auto
   background: $navBackground
   display: flex
   justify-content: center

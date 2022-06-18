@@ -115,7 +115,6 @@ export default {
 </script>
 <style lang="sass">
 .search
-  --text-color: var(--var-busquedaNavLupaHover)
   --primary-color: var(--var-busquedaNavBackground)
   --border-radius:3px
   --width:200px
@@ -127,18 +126,17 @@ export default {
   overflow: hidden
   border-radius: var(--border-radius)
   -webkit-box-shadow: $navButonBoxShadow
-  box-shadow: $navButonBoxShadow
+  box-shadow: 0px 0px 10px 2px $busquedaNavInputBackground
   display: flex
   justify-content: center
   align-items: center
-  
 
   input[type="text"]
     position: relative
     width: var(--height)
     height: var(--height)
     font: 400 18px core-sans, sans-serif
-    color: var(--text-color)
+    color: white
     background: $busquedaNavInputBackground
     border: 0
     box-sizing: border-box
@@ -149,10 +147,10 @@ export default {
     opacity: 0
     cursor: pointer
 
-    &::placeholder 
+    &::placeholder
       color: $navColor
       opacity: 1
-    
+
     &:focus
       z-index: 0
       opacity: 1
@@ -176,7 +174,7 @@ export default {
           top: 17.5px
           left: 12px
           transform: translate(0, 0)
-          fill: var(--var-busquedaNavLupaHover)
+          fill: white
           transition: top 0.5s ease 0.1s, left 0.5s ease 0.1s, fill 0.3s ease
 
   .symbol

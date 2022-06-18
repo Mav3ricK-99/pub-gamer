@@ -77,8 +77,10 @@ export default {
   position: absolute
   top: 50%
 
-.bg-img
-  background: $navBackground
+.bg-img //Esto tenia el background del NAV
+  background: transparent
+  background-repeat: no-repeat
+  background-position: center
 
 .imagePlaceholder
   position: absolute

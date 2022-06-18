@@ -9,7 +9,8 @@
     :navigation="true"
     :modules="modules"
     class="mySwiper"
-  >
+  ><!-- Imagen esta tomando de public yno resource, sera que hay que importarlo primero? -->
+    <!-- creo que es un tema del compilador de npm -->
     <swiper-slide><Imagen height="590px" width="100vw" src="slider1.png"/></swiper-slide>
     <swiper-slide><Imagen height="590px" width="100vw" src="slider2.jpg"/></swiper-slide>
     <swiper-slide><Imagen height="590px" width="100vw" src="slider3.png"/></swiper-slide>
