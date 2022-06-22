@@ -84,6 +84,7 @@ export default {
 .card-prod
     border-radius: 4px
     background: $backgroundCard
+    min-width: 15vw
 
 .tituloCard
     color: $primaryColorLighter

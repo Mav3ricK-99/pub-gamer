@@ -1,27 +1,38 @@
 <template>
   <section>
     <SliderComponent class="shadow" />
-    <hr class="hrSliderSeparador" />
+    <hr class="hrRojo hrHorizontal" />
   </section>
-  <div
-    class="container-fluid backgroundDashboard"
-  >
+  <div class="container-fluid backgroundDashboard">
     <div class="row justify-content-center">
       <div ref="mainRow" class="row">
-
         <div class="col-6 d-flex justify-content-center mt-5">
-          <Imagen src="pibe1.svg" class="chicosArcade"/>
+          <Transition name="slide-chico">
+            <p v-if="mostrarChicos">
+              <Imagen src="pibe1.svg" class="chicosArcade" />
+            </p>
+          </Transition>
+
           <div class="d-flex flex-column">
-            <h2 id="tituloDashboard" class="noselect">Aqui comienza tu sesion de juegos</h2>
-          <Imagen src="pibe2.svg" class="chicosArcade" />
+            <h2 id="tituloDashboard" class="noselect">
+              Aqui comienza tu sesion de juegos
+            </h2>
+            <Transition name="slide-chica">
+              <p v-if="mostrarChicos">
+                <Imagen src="pibe2.svg" class="chicosArcade" />
+              </p>
+            </Transition>
           </div>
         </div>
 
-        <div class="col-1 d-flex justify-content-center">
-          <hr ref="hrSeparador" class="hrSeparador" />
+        <div class="col-separador d-flex justify-content-center">
+          <hr
+            class="hrRojo hrVertical"
+            :class="{ hrVerticalActive: mostrarChicos }"
+          />
         </div>
 
-        <div class="col-5 mt-5">
+        <div class="col-5 mt-5 flex-fill">
           <ProductosHotSale />
         </div>
 
@@ -29,6 +40,15 @@
             Los comentarios que vayan de abajo para arriba uno detras del otro
             <RecomendacionesDashboard/>
           </div>!-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <hr
+          ref="hrSeparadorChicos"
+          :class="{ hrChicosActive: hrChicosEsVisible }"
+          class="hrRojo hrSeparadorChicos"
+        />
       </div>
     </div>
   </div>
@@ -41,7 +61,24 @@ import SliderComponent from "./SliderComponent.vue";
 import ProductosHotSale from "./ProductosHotSale.vue";
 import RecomendacionesDashboard from "./RecomendacionesDashboard.vue";
 
+import { useElementVisibility } from "@vueuse/core";
+import { ref } from "vue";
+
 export default {
+  setup() {
+    const hrSeparadorChicos = ref(null);
+    const hrChicosEsVisible = useElementVisibility(hrSeparadorChicos);
+
+    return {
+      hrSeparadorChicos,
+      hrChicosEsVisible,
+    };
+  },
+  data() {
+    return {
+      mostrarChicos: false,
+    };
+  },
   layout: Layout,
   components: {
     SliderComponent,
@@ -50,9 +87,7 @@ export default {
     Imagen,
   },
   mounted() {
-    window.addEventListener("load", () => {
-      this.$refs.hrSeparador.style.height = "100%";
-    });
+    window.addEventListener("load", () => (this.mostrarChicos = true));
   },
 };
 </script>
@@ -63,26 +98,65 @@ export default {
     background-repeat: no-repeat
     background-size: 100%
 
-.hrSeparador
-    margin: 0
+.col-separador
+    width: auto
+    padding: 0
+
+.hrVertical
     height: 0%
     width: 10px
-    background-color: $secondaryColor
-    opacity: 100
-    transition: height .5s ease-in
+    transition: height .45s ease-in
 
-.hrSliderSeparador
+.hrSeparadorChicos
+    width: 0
+    margin-left: -.75rem !important
+    height: 10px
+
+.hrHorizontal
     margin: 0
     width: 100%
     height: 10px
-    background-color: $secondaryColor
+
+.hrChicosActive
+    transition: width .45s ease-out
+    width: -webkit-calc(100% + 1.5rem + 10px)
+
+.hrVerticalActive
+    height: 100%
+
+.hrRojo
+    margin: 0
+    padding: 0
     opacity: 100
+    background-color: $secondaryColor
 
 .chicosArcade
-    min-width:400px
+    min-width: 400px
 
 #tituloDashboard
     font-family: Lato
-    font-size: 65px
+    font-size: 68px
     color: white
+
+.slide-chico-enter-active
+    transition: all 0.55s ease-out
+
+.slide-chico-leave-active
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1)
+
+.slide-chico-enter-from,
+.slide-chico-leave-to
+    transform: translateX(-50px)
+    opacity: 0
+
+.slide-chica-enter-active
+    transition: all 0.55s ease-out
+
+.slide-chica-leave-active
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1)
+
+.slide-chica-enter-from,
+.slide-chica-leave-to
+    transform: translateY(50px)
+    opacity: 0
 </style>
