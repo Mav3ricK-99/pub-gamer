@@ -45,7 +45,7 @@
           class="hrRojo hrSeparadorChicos"
         />
       </div>
-      <div class="row mt-5 justify-content-around">
+      <div class="row mt-5 justify-content-around pb-4">
         <RecomendacionesDashboard />
         <Imagen
           class="col-5 imagenRecomendaciones"

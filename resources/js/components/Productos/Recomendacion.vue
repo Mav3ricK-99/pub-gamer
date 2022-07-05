@@ -44,8 +44,9 @@ export default {
     padding: 1rem 0 1rem 1.3rem
     font-family: "Lato"
     border-radius: 3px
-    -webkit-box-shadow: 3px 1px 6px 2px rgba(59,17,213,0.05)
-    box-shadow: 3px 1px 6px 2px rgba(59,17,213,0.05)
+    //-webkit-box-shadow: 3px 1px 6px 2px rgba(59,17,213,0.05)
+    //box-shadow: 3px 1px 6px 2px rgba(59,17,213,0.05)
+    border-left: 4px solid $secondaryColorLigther
 
 .nombreRecomendacion
     color: $secondaryColor
