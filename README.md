@@ -139,3 +139,14 @@ poner varios imagenes en el formulario registro y que aparezcan random
 perdi la batalla contra inertia; la unica solucion para que funcione con CSRF es intentar que funcione con axios
 
 SETEAR .env.example
+
+SASS
+
+aclarar y oscurecer colores 
+lighten(red, 25%)
+darken
+
+@mixin background($col)
+    background-color: $col
+
+@include background(red)

@@ -124,7 +124,7 @@ class ProductoController extends Controller
     {
         $listaCategorias = Categoria::with(['subcategoria'])->get();
         $menu = [];
-        
+
         foreach ($listaCategorias as $categoria) {
 
             $menuCategoria = new stdClass();
@@ -141,7 +141,7 @@ class ProductoController extends Controller
             array_push($menu, $menuCategoria);
         }
         //Modelo TAGS tiene muchos a muchos con categorias y productos(?)
-        //Un tag tiene muchos 
+        //Un tag tiene muchos
         //https://stackoverflow.com/questions/41072571/add-tags-to-laravel-built-blog
 
         return response()->json($menu);

@@ -42,7 +42,7 @@ export default {
 };
 </script>
 
-<style lang="sass" scope>
+<style lang="sass">
 .p-splitbutton
   border: none
   outline: none

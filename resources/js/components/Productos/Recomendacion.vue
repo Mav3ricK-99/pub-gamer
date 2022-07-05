@@ -1,14 +1,28 @@
 <template>
-  <div class="d-flex flex-column divReco">
-    <h4 class="nombreReco">Simon dice</h4>
-    <div class="col-8 align-self-center">
-      <blockquote class="textoReco">XDDDDDDD</blockquote>
+  <div class="d-flex flex-column recomendacion">
+    <h4 class="nombreRecomendacion">Simon ha comentado sobre</h4>
+    <div class="col-11 d-flex ml-2">
+      <Imagen :src="producto.imagen" width="150" height="150" />
+      <div>
+        <Rating v-model="val" :stars="5" :cancel="false" />
+        <blockquote class="textoRecomendacion">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod magni
+          deleniti fuga saepe nulla reprehenderit dolor! Aut ut quas mollitia
+          aspernatur fugiat, quis facere nihil nobis nisi earum, iure illo.
+        </blockquote>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Imagen from "./../Util/Imagen.vue";
+import Rating from "primevue/rating";
+
 export default {
+  props: {
+    producto: Object,
+  },
   data() {
     return {
       recomendacion: {
@@ -17,24 +31,31 @@ export default {
       },
     };
   },
+  components: {
+    Imagen,
+    Rating,
+  },
 };
 </script>
 
-<style lang="sass" scoped>
-.divReco
-    background-color: $navButtonBackgroundDarker
-    margin-bottom: 4rem
-    padding: 1rem
+<style lang="sass">
+.recomendacion
+    background-color: $primaryColorDarker
+    padding: 1rem 0 1rem 1.3rem
     font-family: "Lato"
-    border-box: 5px
-    -webkit-box-shadow: 3px 1px 6px 2px rgba(59,17,213,0.1)
-    box-shadow: 3px 1px 6px 2px rgba(59,17,213,0.1)
+    border-radius: 3px
+    -webkit-box-shadow: 3px 1px 6px 2px rgba(59,17,213,0.05)
+    box-shadow: 3px 1px 6px 2px rgba(59,17,213,0.05)
 
-.nombreReco
+.nombreRecomendacion
+    color: $secondaryColor
     font-size: 28px
+    transition: all .5s
 
-.textoReco
-    font-size: 18px
+.textoRecomendacion
+    font-size: 19px
+    color: white
+    margin-left: 2rem
 
 blockquote::before
     content: open-quote
@@ -44,4 +65,15 @@ blockquote::after
 
 blockquote
     quotes: "“" "”" "‘" "’"
+</style>
+
+<style lang="sass">
+.p-rating
+    margin-left: 2rem
+
+.p-rating .p-rating-icon
+    color: #3c9dfd !important
+
+    &:focus
+        box-shadow: none !important
 </style>

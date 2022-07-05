@@ -3,8 +3,8 @@
     <SliderComponent class="shadow" />
     <hr class="hrRojo hrHorizontal" />
   </section>
-  <div class="container-fluid backgroundDashboard">
-    <div class="row justify-content-center">
+  <div class="container-fluid">
+    <div class="row justify-content-center backgroundDashboard">
       <div ref="mainRow" class="row">
         <div class="col-6 d-flex justify-content-center mt-5">
           <Transition name="slide-chico">
@@ -35,19 +35,21 @@
         <div class="col-5 mt-5 flex-fill">
           <ProductosHotSale />
         </div>
-
-        <!--<div class="col-6 flex-fill mt-5">
-            Los comentarios que vayan de abajo para arriba uno detras del otro
-            <RecomendacionesDashboard/>
-          </div>!-->
       </div>
     </div>
-    <div class="row">
-      <div class="col-6">
+    <div class="row justify-content-around backgroundSeccionRecomendaciones">
+      <div>
         <hr
           ref="hrSeparadorChicos"
           :class="{ hrChicosActive: hrChicosEsVisible }"
           class="hrRojo hrSeparadorChicos"
+        />
+      </div>
+      <div class="row mt-5 justify-content-around">
+        <RecomendacionesDashboard />
+        <Imagen
+          class="col-5 imagenRecomendaciones"
+          src="imagenRecomendaciones.png"
         />
       </div>
     </div>
@@ -119,7 +121,7 @@ export default {
 
 .hrChicosActive
     transition: width .45s ease-out
-    width: -webkit-calc(100% + 1.5rem + 10px)
+    width: -webkit-calc(50% + 1.4rem)
 
 .hrVerticalActive
     height: 100%
@@ -132,6 +134,14 @@ export default {
 
 .chicosArcade
     min-width: 400px
+
+.backgroundSeccionRecomendaciones
+    background-color: #1C232B
+
+.imagenRecomendaciones
+    border-radius: 3px
+    -webkit-box-shadow: 2px 1px 50px 20px rgba(0,0,0,0.35)
+    box-shadow: 2px 1px 50px 20px rgba(0,0,0,0.35)
 
 #tituloDashboard
     font-family: Lato
