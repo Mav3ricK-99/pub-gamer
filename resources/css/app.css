@@ -1,9 +1,24 @@
 @font-face {
     font-family: "core-sans";
-    src: url("../fonts/Fontspring-coresansar45.otf");
+    src: url("../fonts/Coresans/Fontspring-coresansar45.otf");
 }
 
 @font-face {
     font-family: "Lato";
-    src: url("../fonts/Lato-Regular.ttf");
+    src: url("../fonts/Lato/Lato-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Nunito-Bold";
+    src: url("../fonts/Nunito/static/Nunito-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Nunito-Medium";
+    src: url("../fonts/Nunito/static/Nunito-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Nunito-Light";
+    src: url("../fonts/Nunito/static/Nunito-Light.ttf");
 }

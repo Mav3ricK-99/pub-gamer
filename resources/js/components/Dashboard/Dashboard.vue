@@ -53,6 +53,7 @@
         />
       </div>
     </div>
+    estas son las reconocidas marcas con las que trabajamos
   </div>
 </template>
 
@@ -126,12 +127,6 @@ export default {
 .hrVerticalActive
     height: 100%
 
-.hrRojo
-    margin: 0
-    padding: 0
-    opacity: 100
-    background-color: $secondaryColor
-
 .chicosArcade
     min-width: 400px
 
@@ -169,4 +164,12 @@ export default {
 .slide-chica-leave-to
     transform: translateY(50px)
     opacity: 0
+</style>
+
+<style lang="sass">
+.hrRojo
+    margin: 0
+    padding: 0
+    opacity: 100
+    background-color: $secondaryColor
 </style>

@@ -7,3 +7,19 @@
     font-family: "Lato";
     src: url(/fonts/Lato-Regular.ttf?9d883d540ee2b4de80247a522dd59656);
 }
+
+@font-face {
+    font-family: "Nunito-Bold";
+    src: url(/fonts/Nunito-Bold.ttf?d5395e91ba6695bfdcb31e2d4b9f16a0);
+}
+
+@font-face {
+    font-family: "Nunito-Medium";
+    src: url(/fonts/Nunito-Medium.ttf?4a2f2bc0b0dcd70052e3ff6dace60841);
+}
+
+@font-face {
+    font-family: "Nunito-Light";
+    src: url(/fonts/Nunito-Light.ttf?effec7cd6b38cd8af17fdb1fcd1b8f3f);
+}
+

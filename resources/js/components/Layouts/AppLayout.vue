@@ -4,11 +4,13 @@
     <ControlFormSesion v-if="mostrarFormulario" v-click-outside="cerrarModal" />
   </Transition>
   <slot />
+   <Footer/>
 </template>
 
 <script>
 import Header from "../Header.vue";
 import ControlFormSesion from "../Usuario/ControlFormSesion.vue";
+import Footer from "../Footer.vue";
 
 import vClickOutside from "click-outside-vue3";
 
@@ -51,6 +53,7 @@ export default {
   components: {
     Header,
     ControlFormSesion,
+    Footer
   },
 };
 </script>

@@ -103,7 +103,7 @@ export default {
     text-align: center
 
 .spanPrecio
-    color: $secondaryColorLigther
+    color: $secondaryColorLighter
     text-shadow: 1px 2.5px 5px rgba(255,255,255,0.1)
 
 .descProducto

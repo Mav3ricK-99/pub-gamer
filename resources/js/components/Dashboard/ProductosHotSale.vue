@@ -83,9 +83,9 @@ export default {
     text-align: center
     color: #fff
     align-self: center
-    text-shadow: 3px 3px 3px $secondaryColorLigther
+    text-shadow: 3px 3px 3px $secondaryColorLighter
     padding-bottom: 1rem
-    border-bottom: 3px solid $secondaryColorLigther
+    border-bottom: 3px solid $secondaryColorLighter
     letter-spacing: 1.7px
 
 .slide-fade-enter-active
