@@ -1,9 +1,7 @@
 window._ = require('lodash');
 window.$ = window.jQuery = require('jquery')
 
-try {
-    require('bootstrap');
-} catch (e) { }
+require('bootstrap');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -17,8 +15,9 @@ window.axios = require('axios');
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Echo = new Echo({
-    broadcaster: process.env.MIX_BROADCAST_DRIVER,
-    key: process.env.MIX_PUSHER_APP_KEY,
+    //Esto deberia ? cargar de .env
+    broadcaster: 'pusher',
+    key: '9543cee9c90878346997',
     cluster: "us2",
     forceTLS: true
 });

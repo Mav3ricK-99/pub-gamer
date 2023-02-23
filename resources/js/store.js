@@ -18,8 +18,10 @@ export const store = new Vuex.Store({
             state.formulario = formulario
         },
         setUsuario(state) {
-            state.usuario = usePage().props.value.usuario;
-            state.usuario != null ? state.isLogueado = true : state.isLogueado = false
+            if (usePage().props.value) {
+                state.usuario = usePage().props.value.usuario;
+                state.usuario != null ? state.isLogueado = true : state.isLogueado = false
+            }
         },
     },
     actions: {
