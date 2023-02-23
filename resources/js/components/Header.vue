@@ -1,44 +1,28 @@
 <template>
   <div class="navBox sticky-top">
-    <div class="col-10 d-flex flex-row justify-content-around align-items-center">
+    <div class="col-11 d-flex flex-row justify-content-around align-items-center">
       <img :src="logo" />
-      <div
-        class="
-          d-flex
-          justify-content-around
-          align-items-center
-          flex-fill
-          botones
-        "
-
-      >
-        <MenuProductos/>
+      <div class="d-flex col-6 justify-content-around align-items-center botones">
+       <!--  <MenuProductos /> -->
         <Link href="./usuario">
-          <button class="navButton">Ofertas</button>
+        <button class="navButton">Ofertas</button>
         </Link>
 
         <Link href="./ayuda">
-          <button class="navButton">Ayuda</button>
+        <button class="navButton">Ayuda</button>
         </Link>
       </div>
-      <div class="d-flex align-items-center">
+      <div class="d-flex col-4 justify-content-around align-items-center">
         <InputBusqueda />
-        <div
-          v-if="this.isLogueado"
-          class="
-            col-lg-2
-            d-flex
-            flex-row
-            align-items-center
-            justify-content-evenly
-          "
-        >
+        <div v-if="this.isLogueado" class=" col-lg-2 d-flex flex-row align-items-center justify-content-evenly">
           <img width="26" :src="notif" />
           <PerfilDropDown />
         </div>
         <div v-else class="d-flex flex-column align-items-center">
-          <button v-on:click="setFormulario('formularioRegistro')" ref="registro" class="buttonReg mb-1">Registrarse</button>
-          <span class="spanInicioSesion">¿Ya formas parte del Pub? <span role='button' ref="inicio" v-on:click="setFormulario('formularioIngreso')">Inicia sesion</span></span>
+          <button v-on:click="setFormulario('formularioRegistro')" ref="registro"
+            class="buttonReg mb-1">Registrarse</button>
+          <span class="spanInicioSesion">¿Ya formas parte del Pub? <span role='button' ref="inicio"
+              v-on:click="setFormulario('formularioIngreso')">Inicia sesion</span></span>
         </div>
       </div>
     </div>
@@ -50,7 +34,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 import logo from "../../logos/pubgamer.png";
 import notification from "../../logos/notification.png";
 import InputBusqueda from "./NavComponents/InputBusqueda.vue";
-import MenuProductos from "./NavComponents/MenuProductos.vue";
+/* import MenuProductos from "./NavComponents/MenuProductos.vue"; */
 import PerfilDropDown from "./Usuario/PerfilDropdown.vue";
 
 import { computed } from 'vue'
@@ -78,7 +62,7 @@ export default {
     Link,
     InputBusqueda,
     PerfilDropDown,
-    MenuProductos,
+    /* MenuProductos, */
   },
 };
 </script>
@@ -101,7 +85,7 @@ export default {
 .spanInicioSesion
   font-family: Lato
   font-size: .95rem
-  color: $navColor
+  color: $primaryColorDarker
   cursor: default
 
 .buttonReg

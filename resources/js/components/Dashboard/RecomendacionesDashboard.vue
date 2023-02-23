@@ -6,7 +6,7 @@
     <div class="seccionRecos d-flex flex-column justify-content-around">
       <TransitionGroup name="slide-reco">
         <div v-for="producto in productos" v-show="mostrarRecomendaciones" :key="producto">
-          <Recomendacion :producto="producto"/>
+          <Recomendacion :producto="producto" />
         </div>
       </TransitionGroup>
     </div>
@@ -36,9 +36,9 @@ export default {
   },
   mounted() {
     axios.get("busqueda/productos/2").then((resultado) => {
-        console.log(resultado);
-        this.productos = resultado.data;
-      })
+      console.log(resultado);
+      this.productos = resultado.data;
+    })
       .catch((error) => console.log(error));
   },
   watch: {
@@ -58,6 +58,7 @@ export default {
 
 <style lang="sass" scoped>
 .tituloRecomendaciones
+    font-family: 'Nunito-Bold'
     font-size: 46px
     color: white
 

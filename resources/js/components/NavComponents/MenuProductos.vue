@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Splitbutton from "primevue/splitbutton";
+/* import Splitbutton from "primevue/splitbutton"; */
 
 export default {
   mounted() {
@@ -37,7 +37,7 @@ export default {
     };
   },
   components: {
-    Splitbutton,
+    /* Splitbutton, */
   },
 };
 </script>

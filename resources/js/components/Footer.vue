@@ -97,7 +97,7 @@ a
         border-bottom: 2px solid $secondaryColorLighter
 
         a
-            padding-left: 1rem
+            padding-left: .55rem
 
 .separadorNavFooter
     width: 2px

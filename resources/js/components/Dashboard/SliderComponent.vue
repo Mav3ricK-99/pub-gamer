@@ -1,23 +1,22 @@
 <template>
-  <swiper
-    :spaceBetween="30"
-    :centeredSlides="true"
-    :autoplay="{
-      delay: 3000,
-      disableOnInteraction: false,
-    }"
-    :navigation="true"
-    :modules="modules"
-    ><!-- Imagen esta tomando de public yno resource, sera que hay que importarlo primero? -->
+  <swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+    delay: 3000,
+    disableOnInteraction: false,
+  }" :navigation="true" :modules="modules">
+    <!-- Imagen esta tomando de public yno resource, sera que hay que importarlo primero? -->
     <!-- creo que es un tema del compilador de npm -->
-    <swiper-slide><Imagen height="590px" width="100vw" src="slider1.png"
-    /></swiper-slide>
-    <swiper-slide><Imagen height="590px" width="100vw" src="slider2.jpg"
-    /></swiper-slide>
-    <swiper-slide><Imagen height="590px" width="100vw" src="slider3.png"
-    /></swiper-slide>
-    <swiper-slide><Imagen height="590px" width="100vw" src="slider4.png"
-    /></swiper-slide>
+    <swiper-slide>
+      <Imagen height="590px" width="100vw" src="slider1.png" />
+    </swiper-slide>
+    <swiper-slide>
+      <Imagen height="590px" width="100vw" src="slider2.jpg" />
+    </swiper-slide>
+    <swiper-slide>
+      <Imagen height="590px" width="100vw" src="slider3.png" />
+    </swiper-slide>
+    <swiper-slide>
+      <Imagen height="590px" width="100vw" src="slider4.png" />
+    </swiper-slide>
   </swiper>
 </template>
 <script>

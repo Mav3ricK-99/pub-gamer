@@ -4,7 +4,7 @@
     <div class="col-11 d-flex ml-2">
       <Imagen :src="producto.imagen" width="150" height="150" />
       <div>
-        <Rating v-model="val" :stars="5" :cancel="false" />
+        <!-- <Rating v-model="val" :stars="5" :cancel="false" /> -->
         <blockquote class="textoRecomendacion">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod magni
           deleniti fuga saepe nulla reprehenderit dolor! Aut ut quas mollitia
@@ -17,7 +17,6 @@
 
 <script>
 import Imagen from "./../Util/Imagen.vue";
-import Rating from "primevue/rating";
 
 export default {
   props: {
@@ -33,7 +32,6 @@ export default {
   },
   components: {
     Imagen,
-    Rating,
   },
 };
 </script>

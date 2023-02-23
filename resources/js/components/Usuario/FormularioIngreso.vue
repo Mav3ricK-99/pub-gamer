@@ -5,22 +5,13 @@
     <div class="mt-3">
       <div class="col-lg-12 d-flex justify-content-center mb-1">
         <div class="col-lg-11 flex-column">
-          <label
-            for="inputEmail"
-            class="inp labelEmail d-flex justify-content-center"
-          >
-            <input
-              class="mb-1 align-items-center"
-              v-model="formulario.email"
-              type="email"
-              required
-              id="inputEmail"
-              placeholder="&nbsp;"
-            />
+          <label for="inputEmail" class="inp labelEmail d-flex justify-content-center">
+            <input class="mb-1 align-items-center" v-model="formulario.email" type="email" required id="inputEmail"
+              placeholder="&nbsp;" />
             <span class="label">Correo electronico</span>
             <span class="focus-bg"></span>
           </label>
-          <span class="fcolor-naranja">Ej. federico1999g@gmail.com</span>
+          <span class="ejemploEmail">Ej. federico1999g@gmail.com</span>
           <div class="divError mb-1 mt-1">
             {{ formulario.errors.email }}
           </div>
@@ -29,14 +20,8 @@
       <div class="col-lg-12 d-flex justify-content-center mb-1">
         <div class="col-lg-11">
           <label for="inputPass" class="inp d-flex justify-content-center">
-            <input
-              v-model="formulario.password"
-              type="password"
-              required
-              id="inputPass"
-              autocomplete="off"
-              placeholder="&nbsp;"
-            />
+            <input v-model="formulario.password" type="password" required id="inputPass" autocomplete="off"
+              placeholder="&nbsp;" />
             <span class="label">Contraseña</span>
             <span class="focus-bg"></span>
           </label>
@@ -48,12 +33,8 @@
     </div>
     <div class="col-lg-12">
       <div class="d-flex justify-content-end">
-        <button
-          type="submit"
-          :disabled="formulario.processing"
-          class="rounded pt-2 pb-2 ps-3 pe-3 botonFormulario"
-        >
-          <span>Ingresar</span>
+        <button type="submit" :disabled="formulario.processing" class="rounded pt-2 pb-2 ps-4 pe-4 botonFormulario">
+          <span>Continuar</span>
         </button>
       </div>
     </div>
@@ -105,28 +86,27 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.fcolor-naranja
-  color: $formInputColor
+.ejemploEmail
+  color: $primaryColorUserSessionForm
   font-size: 17px
 
 .botonFormulario
   border: none
   outline: none
   font-size: 19px
-  background: #19315A
-  color: #FF773D
+  background: $btnBgrnUserSessionForm
+  color: $btnColorUserSessionForm
   font-family: core-sans
   margin-top: .7rem
   margin-right: 1.5rem
-  transition: all 1s
+  transition: all .5s
 
   &:hover
-    color: $formInputColor
-    background: $backgroundBotonForm
+    background: $hoverBtnBgrnUserSessionForm
 
 .botonFormulario:disabled
   transition: all 0s
-  background: $formInputDisabledBackground
+  background: $disabledBtnBgrnUserSessionForm
   color: gray
 
 .botonFormulario span
@@ -137,7 +117,7 @@ export default {
 
 .divError
   min-height: 20px
-  color: $formInputColor
+  color: $primaryColorUserSessionForm
   margin-left: 25px
   font-size: 13px
 
@@ -167,7 +147,7 @@ export default {
     top: 17px
     left: 14px
     font-size: 17px
-    color: #FF773D
+    color: $labelUserSessionForm
     font-weight: 500
     transform-origin: 0 0
     transform: translate3d(0,0,0)
@@ -180,7 +160,7 @@ export default {
     left: 0
     width: 100%
     height: 100%
-    background: rgba($formInputColor,.07)
+    background: rgba($primaryColorUserSessionForm,.07)
     z-index: -1
     transform: scaleX(0)
     transform-origin: left
@@ -202,14 +182,14 @@ export default {
     height: 56px
     font-size: 18px
     font-weight: 400
-    background: $backgroundInputForm
+    background: $inputBgrnUserSessionForm
     border-box: $navButonBorderRadius
-    box-shadow: inset 0 -1px 0 rgba($formInputColor,.4)
-    color: $formInputColor
+    box-shadow: inset 0 -1px 0 rgba(white,.1)
+    color: white
     transition: all .15s ease
 
     &:hover
-      box-shadow: inset 0 -1px 0 rgba($formInputColor,.5)
+      box-shadow: inset 0 -1px 0 rgba($primaryColorUserSessionForm,.5)
 
     &:not(:placeholder-shown)
       + .label
@@ -217,11 +197,11 @@ export default {
         transform: translate3d(0,-12px,0) scale(.75)
 
     &:focus
-      background: rgba($formInputColor,.05)
+      background: rgba($primaryColorUserSessionForm,.05)
       outline: none
-      box-shadow: inset 0 -2px 0 $formInputColor
+      box-shadow: inset 0 -2px 0 $primaryColorUserSessionForm
       + .label
-        color: $formInputColor
+        color: $primaryColorUserSessionForm
         transform: translate3d(0,-12px,0) scale(.75)
         + .focus-bg
           transform: scaleX(1)

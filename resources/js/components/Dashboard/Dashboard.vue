@@ -26,10 +26,7 @@
         </div>
 
         <div class="col-separador d-flex justify-content-center">
-          <hr
-            class="hrRojo hrVertical"
-            :class="{ hrVerticalActive: mostrarChicos }"
-          />
+          <hr class="hrRojo hrVertical" :class="{ hrVerticalActive: mostrarChicos }" />
         </div>
 
         <div class="col-5 mt-5 flex-fill">
@@ -39,21 +36,16 @@
     </div>
     <div class="row justify-content-around backgroundSeccionRecomendaciones">
       <div>
-        <hr
-          ref="hrSeparadorChicos"
-          :class="{ hrChicosActive: hrChicosEsVisible }"
-          class="hrRojo hrSeparadorChicos"
-        />
+        <hr ref="hrSeparadorChicos" :class="{ hrChicosActive: hrChicosEsVisible }" class="hrRojo hrSeparadorChicos" />
       </div>
       <div class="row mt-5 justify-content-around pb-4">
         <RecomendacionesDashboard />
-        <Imagen
-          class="col-5 imagenRecomendaciones"
-          src="imagenRecomendaciones.png"
-        />
+        <Imagen class="col-5 imagenRecomendaciones" src="imagenRecomendaciones.png" />
       </div>
     </div>
-    estas son las reconocidas marcas con las que trabajamos
+    <div class="row justify-content-around">
+      <Marcas />
+    </div>
   </div>
 </template>
 
@@ -63,6 +55,7 @@ import Layout from "../Layouts/AppLayout.vue";
 import SliderComponent from "./SliderComponent.vue";
 import ProductosHotSale from "./ProductosHotSale.vue";
 import RecomendacionesDashboard from "./RecomendacionesDashboard.vue";
+import Marcas from "./Marcas.vue";
 
 import { useElementVisibility } from "@vueuse/core";
 import { ref } from "vue";
@@ -87,6 +80,7 @@ export default {
     SliderComponent,
     ProductosHotSale,
     RecomendacionesDashboard,
+    Marcas,
     Imagen,
   },
   mounted() {
@@ -97,7 +91,7 @@ export default {
 
 <style lang="sass" scoped>
 .backgroundDashboard
-    background-image: url('@/../img/dashboard.png')
+    /* background-image: url('@/../img/dashboard.png') */
     background-repeat: no-repeat
     background-size: 100%
 
@@ -139,7 +133,7 @@ export default {
     box-shadow: 2px 1px 50px 20px rgba(0,0,0,0.35)
 
 #tituloDashboard
-    font-family: Lato
+    font-family: 'Lato'
     font-size: 68px
     color: white
 

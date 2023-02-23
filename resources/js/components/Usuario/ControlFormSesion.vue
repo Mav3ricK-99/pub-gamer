@@ -1,29 +1,16 @@
 <template>
-<div class="container-fluid" style="z-index:999">
+  <div class="container-fluid" style="z-index:999">
     <div class="col-12 col-lg-7 shadow modalRegistro">
       <div class="d-flex">
-          
-          <util-img width="512px" height="720px" src="pixelart.jpg" />
-          <div
-            class="
-            form-container
-            col-7
-            pt-3
-            pb-3
-            d-flex
-            justify-content-evenly
-            flex-column
-            "
-          >
-            <Transition name="slide-up">
-              <component class="componenteFormulario col-7"
-                :is="formulario"
-              ></component>
-            </Transition>
-          </div>
+        <util-img width="512px" height="720px" src="pixelart.jpg" />
+        <div class="form-container col-7 pt-3 pb-3 d-flex justify-content-evenly flex-column">
+          <Transition name="slide-up">
+            <component class="componenteFormulario col-7" :is="formulario"></component>
+          </Transition>
+        </div>
       </div>
+    </div>
   </div>
-</div>
 </template>
 <script>
 import formularioRegistro from "./FormularioRegistro.vue";
@@ -75,7 +62,7 @@ export default {
   transform: translateX(-50%)
 
 .form-container
-  background: $formularioBackground
+  background: $formBgrnUserSessionForm
   border-top-right-radius: .25rem
   border-bottom-right-radius: .25rem
 </style>

@@ -53,7 +53,7 @@
           <span class="label">Correo electronico</span>
           <span class="focus-bg"></span>
         </label>
-        <span class="fcolor-naranja">Ej. federico1999g@gmail.com</span>
+        <span class="spanAyudaFormularioSesion">Ej. federico1999g@gmail.com</span>
         <div class="divError mb-1 mt-1">
           {{ formulario.errors.email }}
         </div>
@@ -91,7 +91,7 @@
           <span class="label">Repetir contraseña</span>
           <span class="focus-bg"></span>
         </label>
-        <span ref="s" class="fcolor-naranja"> Ej. Pub.Gamer1! </span>
+        <span ref="s" class="spanAyudaFormularioSesion"> Ej. Pub.Gamer1! </span>
       </div>
     </div>
 
@@ -161,8 +161,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.fcolor-naranja
-  color: $formInputColor
+.spanAyudaFormularioSesion
+  color: $primaryColorUserSessionForm
   margin-left: 2rem
   font-size: 17px
 
@@ -170,20 +170,19 @@ export default {
   border: none
   outline: none
   font-size: 19px
-  background: #19315A
-  color: #FF773D
+  background: $btnBgrnUserSessionForm
+  color: white
   font-family: core-sans
   margin-top: .7rem
   margin-right: 1.5rem
   transition: all 1s
 
   &:hover
-    color: $formInputColor
-    background: $backgroundBotonForm
+    background: $hoverBtnBgrnUserSessionForm
 
 .botonFormulario:disabled
   transition: all 0s
-  background: $formInputDisabledBackground
+  background: $disabledBtnBgrnUserSessionForm
   color: gray
 
 .botonFormulario span
@@ -224,7 +223,7 @@ export default {
     top: 17px
     left: 32px
     font-size: 17px
-    color: #FF773D
+    color: $labelUserSessionForm
     font-weight: 500
     transform-origin: 0 0
     transform: translate3d(0,0,0)
@@ -237,7 +236,7 @@ export default {
     left: 0
     width: 100%
     height: 100%
-    background: rgba($formInputColor,.05)
+    background: rgba($primaryColorUserSessionForm,.07)
     z-index: -1
     transform: scaleX(0)
     transform-origin: left
@@ -259,9 +258,9 @@ export default {
     height: 56px
     font-size: 18px
     font-weight: 400
-    background: $backgroundInputForm
+    background: $inputBgrnUserSessionForm
     border-box: $navButonBorderRadius
-    box-shadow: inset 0 -1px 0 rgba($formInputColor,.4)
+    box-shadow: inset 0 -1px 0 rgba(white,.1)
     color: $formInputColor
     transition: all .25s ease
 
@@ -269,7 +268,7 @@ export default {
       width: 92%
 
     &:hover
-      box-shadow: inset 0 -1px 0 rgba($formInputColor,.5)
+      box-shadow: inset 0 -1px 0 rgba($primaryColorUserSessionForm,.5)
 
     &:not(:placeholder-shown)
       + .label
@@ -277,11 +276,11 @@ export default {
         transform: translate3d(0,-12px,0) scale(.75)
 
     &:focus
-      background: rgba($formInputColor,.05)
+      background: rgba($primaryColorUserSessionForm,.05)
       outline: none
-      box-shadow: inset 0 -2px 0 $formInputColor
+      box-shadow: inset 0 -2px 0 $primaryColorUserSessionForm
       + .label
-        color: $formInputColor
+        color: $primaryColorUserSessionForm
         transform: translate3d(0,-12px,0) scale(.75)
         + .focus-bg
           transform: scaleX(1)

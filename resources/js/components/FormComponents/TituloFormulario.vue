@@ -17,7 +17,7 @@
     letter-spacing: 2px
 
 hr
-    color: $formInputColor
+    color: $secondaryColor
     align-self: center
     opacity: .90
 
