@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from '@inertiajs/vue3'
 
 export const store = new Vuex.Store({
     state: {

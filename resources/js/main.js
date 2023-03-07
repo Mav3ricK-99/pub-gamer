@@ -4,19 +4,16 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { store } from './store'
 import VueLazyLoad from 'vue3-lazyload'
 
-import * as VueRouter from 'vue-router'
 import { BootstrapVue3 } from 'bootstrap-vue-3'
-import { Inertia } from '@inertiajs/inertia'
 import {RouterLink} from 'vue-router'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
 
 createInertiaApp({
-  resolve: name => require(`./components/${name}`),
+  resolve: (name) => require(`./components/${name}.vue`),
   setup({ el, App, props, plugin }) {
-    const app = createApp({ render: () => h(App, props) })
-      .use(Inertia)
+    createApp({ render: () => h(App, props) })
       .use(VueLazyLoad)
       .use(RouterLink)
       .use(store)
