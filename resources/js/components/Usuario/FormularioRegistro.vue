@@ -112,7 +112,7 @@
 
 <script>
 import TituloFormulario from "@/components/FormComponents/TituloFormulario.vue";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from '@inertiajs/vue3';
 
 import { useStore } from "vuex";
 export default {

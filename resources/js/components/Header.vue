@@ -3,7 +3,7 @@
     <div class="col-11 d-flex flex-row justify-content-around align-items-center">
       <img :src="logo" />
       <div class="d-flex col-6 justify-content-around align-items-center botones">
-       <!--  <MenuProductos /> -->
+        <MenuProductos />
         <Link href="./usuario">
         <button class="navButton">Ofertas</button>
         </Link>
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link } from '@inertiajs/vue3';
 import logo from "../../logos/pubgamer.png";
 import notification from "../../logos/notification.png";
 import InputBusqueda from "./NavComponents/InputBusqueda.vue";
-/* import MenuProductos from "./NavComponents/MenuProductos.vue"; */
+import MenuProductos from "./NavComponents/MenuProductos.vue";
 import PerfilDropDown from "./Usuario/PerfilDropdown.vue";
 
 import { computed } from 'vue'

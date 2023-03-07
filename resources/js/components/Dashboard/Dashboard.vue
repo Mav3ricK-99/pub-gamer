@@ -91,7 +91,7 @@ export default {
 
 <style lang="sass" scoped>
 .backgroundDashboard
-    /* background-image: url('@/../img/dashboard.png') */
+    background-image: url('@/../img/dashboard.png')
     background-repeat: no-repeat
     background-size: 100%
 
