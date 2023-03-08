@@ -26,7 +26,7 @@ class Cart extends Model
     protected $cartItem = [];
     public $cartItems, $item;
 
-    public function remove(Producto $prod){
+    public function remove( $prod){
 
         $this->cartItems = Cart::getCart();
 
@@ -36,7 +36,7 @@ class Cart extends Model
         }
     }
 
-    public function add(Producto $prod, $cantidad){
+    public function add(Product $prod, $cantidad){
 
         $this->cartItems = Cart::getCart();
 
@@ -51,10 +51,10 @@ class Cart extends Model
         }
     }
 
-    private function updateCart(Producto $prod, $cantidad){
+    private function updateCart(Product $prod, $cantidad){
 
         $cantidadTotal = $cantidad + $this->getItem($prod)['cantidad'];
-        if(Producto::productoTieneStock($prod, $cantidadTotal)){
+        if($prod->stock >= $cantidad){
             
             $this->cartItem = Arr::pull($this->cartItems, array_search($this->item, $this->cartItems));
             $this->cartItem['cantidad'] = $cantidadTotal;
@@ -80,7 +80,7 @@ class Cart extends Model
         return Arr::get($this->cartItems,array_search($prod->id, data_get($this->cartItems, '*.producto.id')));
     }
 
-    private function productExistsInCart(Producto $prod){
+    private function productExistsInCart(Product $prod){
 
         foreach($this->cartItems as $productInCart){
 

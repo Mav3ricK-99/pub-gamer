@@ -16,7 +16,7 @@
           <a>Inicio</a>
         </li>
         <li class="itemNav">
-          <a>Ver catalogo</a>
+          <Link href="/listado-productos" method="get" as="a">Ver catalogo</Link>
         </li>
         <li class="itemNav">
           <a>Ayuda con un pago</a>
@@ -41,12 +41,16 @@
 
 <script>
 import logo from "../../logos/pubgamerLogo.png";
+import { Link } from '@inertiajs/vue3'
 export default {
   data() {
     return {
       logo: logo,
     };
   },
+  components: {
+    Link,
+  }
 };
 </script>
 
@@ -92,6 +96,10 @@ a
     font-size: 17px
     border-bottom: 2px solid transparent
     transition: border .45s ease-out
+
+    a
+        color: white
+        text-decoration: none
 
     &:hover
         border-bottom: 2px solid $secondaryColorLighter

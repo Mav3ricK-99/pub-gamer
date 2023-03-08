@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UsersSeed extends Seeder
+class PublicacionesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +16,9 @@ class UsersSeed extends Seeder
      */
     public function run()
     {
-        User::create([
-            'nombre' => 'Federico Gutierrez',
-            'email' => 'federico_99@live.com.ar',
-            'password' => bcrypt('federico'),
+        Post::create([
+            'user_id' => User::first()->id,
+            'producto_id' => 1
         ]);
     }
 }

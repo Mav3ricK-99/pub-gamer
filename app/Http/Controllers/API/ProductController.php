@@ -3,26 +3,27 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Http\Requests\ProductoRequest;
-use App\Models\Producto;
+use App\Http\Requests\ProductRequest;
+use App\Models\Product;
 use App\Models\Subcategoria;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Contracts\Cache\Store;
 use stdClass;
 
-class ProductoController extends Controller
+class ProductController extends Controller
 {
     /**
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $productos = Producto::all();
+        $Products = Product::all();
 
-        return response()->json($productos);
+        return response()->json($Products);
     }
 
     /**
@@ -37,15 +38,15 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductoRequest $request)
+    public function store(ProductRequest $request)
     {
-        $dataProducto = $request->all();
+        $dataProduct = $request->all();
 
-        $producto = Producto::create($dataProducto);
+        $Product = Product::create($dataProduct);
 
-        $producto->save();
+        $Product->save();
 
-        return response()->json($producto);
+        return response()->json($Product);
     }
 
     /**
@@ -54,9 +55,9 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $producto = Producto::find($id);
+        $Product = Product::find($id);
 
-        return response()->json($producto);
+        return response()->json($Product);
     }
 
     /**
@@ -64,17 +65,17 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductoRequest $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         $this->validarID($id);
 
-        $dataProducto = $request->all();
+        $dataProduct = $request->all();
 
-        $producto = Producto::find($id);
+        $Product = Product::find($id);
 
-        $producto->update($dataProducto);
+        $Product->update($dataProduct);
 
-        return response()->json($producto);
+        return response()->json($Product);
     }
 
     /**
@@ -85,31 +86,31 @@ class ProductoController extends Controller
     {
         $this->validarID($id);
 
-        $producto = Producto::find($id);
+        $Product = Product::find($id);
 
-        $resultado = ['mensaje' => 'El producto ya fue eliminado anteriormente'];
+        $resultado = ['mensaje' => 'El Product ya fue eliminado anteriormente'];
 
-        if ($producto) {
-            $resultado = $producto->delete();
+        if ($Product) {
+            $resultado = $Product->delete();
         }
         return response()->json($resultado);
     }
 
     //este metodo no va aca bruh si no en controlador publicaciones
-    public function getPublicacionByProducto($id)
+    public function getPublicacionByProduct($id)
     {
 
-        $producto = Producto::find($id);
+        $Product = Product::find($id);
 
-        return response()->json($producto->publicacion);
+        return response()->json($Product->publicacion);
     }
 
     public function validarID($id)
     {
 
         $validator = Validator::make(['id' => $id], [
-            'id' => 'required|exists:productos,id',
-        ], ['*.exists' => 'El Producto no se encuentra en el sistema']);
+            'id' => 'required|exists:Products,id',
+        ], ['*.exists' => 'El Product no se encuentra en el sistema']);
 
         if ($validator->fails()) {
             throw new HttpResponseException(response()->json([
@@ -120,9 +121,9 @@ class ProductoController extends Controller
         }
     }
 
-    public function menuProductos()
+    public function menuProducts()
     {
-        $listaCategorias = Categoria::with(['subcategoria'])->get();
+        $listaCategorias = Category::with(['subcategoria'])->get();
         $menu = [];
 
         foreach ($listaCategorias as $categoria) {
@@ -140,22 +141,18 @@ class ProductoController extends Controller
             }
             array_push($menu, $menuCategoria);
         }
-        //Modelo TAGS tiene muchos a muchos con categorias y productos(?)
-        //Un tag tiene muchos
-        //https://stackoverflow.com/questions/41072571/add-tags-to-laravel-built-blog
 
         return response()->json($menu);
     }
 
-    public function buscarProducto($criterio)
+    public function buscar($criterio)
     {
-
-        $prods = Producto::where('nombreProducto', 'LIKE', '%' . $criterio . '%')
+        $prods = Product::where('nombre', 'LIKE', '%' . $criterio . '%')
             ->orWhere('fabricante', 'LIKE', '%' . $criterio . '%')
             ->get();
 
         foreach ($prods as $prod) {
-            $prod->imagen = "data:image/jpeg;base64," . base64_encode(Storage::get('imagenes/productos/cpu-i7.jpg'));
+            $prod->imagen = "data:image/jpeg;base64," . base64_encode(Storage::get('imagenes/Products/cpu-i7.jpg'));
         }
 
         return response()->json($prods);

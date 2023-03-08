@@ -5,8 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 
-class PermisoUpdateRequest extends FormRequest
+class PaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,15 +22,22 @@ class PermisoUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            '*.required' => 'El campo :attribute es requerido!',
-            '*.min' => 'El campo :attribute debe tener al menos 3 caracteres',
+            '*.required' => 'Se esperaba el campo :attribute',
+            '*.integer' => 'El valor del campo :attribute debe ser un numero entero',
+            '*.numeric' => 'El valor del campo :attribute debe ser un numero',
+            '*.min' => 'El valor del campo :attribute debe ser como minimo 1',
+            '*.max' => 'El valor del campo :attribute debe ser como maximo 12'
         ];
     }
-
+    
     public function rules()
     {
         return [
-            'permiso' => 'required|min:3',
+            'issuer_id' => 'required|integer',
+            'payment_method_id' => 'required',
+            'transaction_amount' => 'required|numeric|min:1',
+            'installments' => 'required|integer|min:1|max:12',
+            'token' => 'required',
         ];
     }
 

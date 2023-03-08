@@ -2,26 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RealizarPagoRequest;
+use App\Http\Requests\PaymentRequest;
 use Illuminate\Http\Request;
-use MercadoPago\SDK;
-use MercadoPago\Payment;
-use MercadoPago\Payer;
+use MercadoPayment\SDK;
+use MercadoPayment\Payment;
+use MercadoPayment\Payer;
 
-class PagoController extends Controller
+class PaymentController extends Controller
 {
-    public function verVistaPago(Request $request){
-
-        return response()->view('pagos.realizarPago');
+    public function verVistaPayment(Request $request){
+        return response()->view('Payments.realizarPayment');
     }
 
-    public function realizarPago(RealizarPagoRequest $request){
+    public function realizarPayment(PaymentRequest $request){
 
         $data = $request->all();
 
         //5031 7557 3453 0604
         //11/25
-        SDK::setAccessToken(config('app.MERCADOPAGO_ACCESS_KEY'));
+        SDK::setAccessToken(config('app.MERCADOPayment_ACCESS_KEY'));
 
         $payment = new Payment();
         $payment->transaction_amount = (float)$data['transaction_amount'];

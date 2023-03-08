@@ -25,5 +25,11 @@ export const store = new Vuex.Store({
         },
     },
     actions: {
+        /* getProducts(store) { //No lo estoy unsado /async-util tampoco . . espero la oportunidad
+            doAsync(store, { https://medium.com/@lachlanmiller_52885/a-pattern-to-handle-ajax-requests-in-vuex-2d69bc2f8984
+                url: 'http://localhost:8000/',
+                mutationTypes: types.GET_INFO_ASYNC
+            })
+        }, */
     }
 })

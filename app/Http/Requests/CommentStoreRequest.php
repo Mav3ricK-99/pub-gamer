@@ -5,29 +5,38 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\Rule;
 
-class PublicacionStoreRequest extends FormRequest
+class CommentStoreRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
     public function authorize()
     {
+
+        //Auth::user()->tokenCan('place-orders') ? true : false;
+
         return true;
     }
 
     public function messages()
     {
         return [
-            '*.required' => 'Se esperaba un campo especificando el producto',
-            '*.integer' => 'El valor id del producto debe ser un numero',
-            '*.exists' => 'El producto no se encuentra en nuestra base de datos',
-            '*.unique' => 'Ya existe una publicacion para este producto'
+            '*.required' => 'Se esperaba el campo :attribute',
+            '*.max' => 'Se supero el numero maximo de caracteres',
+            '*.exists' => 'La publicacion no se encuentra en nuestra base de datos',
         ];
     }
     
     public function rules()
     {
         return [
-            'producto_id' => ['required', 'integer', 'exists:productos,id', Rule::unique('publicaciones')->whereNull('deleted_at')],
+            //CUANDO LA PUBLICACION NO ESTA 'ELIMINADA'
+            //exists:comentarios en respuesta??
+            'publicacion_id' => ['required', 'integer', 'exists:publicaciones,id'],
+            'mensaje' => 'required|max:255',
         ];
     }
 

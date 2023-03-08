@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
-use App\Events\ProductoIsCreated;
+use App\Events\ProductIsCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Publicacion;
+use App\Models\Post;
+use Spatie\Tags\HasTags;
 
-class Producto extends Model
+class Product extends Model
 {
+    use HasTags;
     use HasFactory;
     use SoftDeletes;
 
+    protected $table = 'productos';
+
     protected $fillable = [
-        'nombreProducto',
+        'nombre',
         'stock',
         'precio',
         'subcategoria',
@@ -27,21 +31,16 @@ class Producto extends Model
     ];
 
     protected $dispatchesEvents = [
-        'created' => ProductoIsCreated::class,
+        'created' => ProductIsCreated::class,
     ];
 
-    public static function productoTieneStock(Producto $prod, $stock){
-
-        return true ? Producto::find($prod->id)->stock >= $stock : false;
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 
-    public function categoria(){
-        return $this->belongsTo(Subcategoria::class, 'categoria');
-    }
-
-    public function publicacion()
+    public function post()
     {
-        return $this->hasOne(Publicacion::class);
+        return $this->hasOne(Post::class);
     }
 
 }

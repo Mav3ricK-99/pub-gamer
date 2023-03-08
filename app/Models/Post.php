@@ -7,31 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class Publicacion extends Model
+//Quitar este modelo?
+class Post extends Model
 {
+    use HasUuids;
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'producto_id',
-        'autorPublicacion',
-        'comentarios',
     ];
 
     protected $table = 'publicaciones';
 
-    public function producto()
+    public function product()
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Product::class);
     }
 
-    public function comentarios()
+    public function comments()
     {            
-        return $this->morphMany(Comentario::class, 'comentable')->whereNull('respuesta_id');
+        return $this->morphMany(Comment::class, 'comentable', Post::class);
     } 
 
     public function user(){
-        return $this->belongsTo(User::class, 'autorPublicacion');
+        return $this->belongsTo(User::class, 'autor');
     }
 }

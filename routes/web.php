@@ -1,44 +1,45 @@
 <?php
 
-use App\Http\Controllers\API\ProductoController;
+use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\PublicacionController;
-use App\Http\Controllers\ComentarioController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PagoController;
-use Illuminate\Contracts\Pagination\Paginator;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ListadoProductosController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 Route::inertia('/', 'Dashboard/Dashboard');
 
-Route::group(['prefix' => 'publicacion' /*,'middleware' => ['auth:api']]))*/], function () {
+Route::get('/listado-productos', [ListadoProductosController::class, 'index']);
 
-    Route::post('/',[PublicacionController::class, 'store']);//->middleware('scopes:altaProducto');
-    Route::get('/',[PublicacionController::class, 'index']);
-    /*sacar*/Route::get('/{id}',[PublicacionController::class, 'show']);
-    Route::delete('/{id}',[PublicacionController::class, 'destroy']);
-    //Route::get('/publicacion/{id}',[PublicacionController::class, 'getPublicacionByProducto'])->middleware('scopes:altaProducto');
+Route::group(['prefix' => 'publicacion', 'middleware' => ['auth:api']], function () {
+
+    Route::post('/', [PostController::class, 'store']); //->middleware('scopes:altaProducto');
+    Route::get('/', [PostController::class, 'index']);
+    /*sacar*/
+    Route::get('/{id}', [PostController::class, 'show']);
+    Route::delete('/{id}', [PostController::class, 'destroy']);
+    //Route::get('/Post/{id}',[PostController::class, 'getPostByProducto'])->middleware('scopes:altaProducto');
 });
 
 Route::group(['prefix' => 'comentario', 'middleware' => ['auth:api']], function () {
 
-    Route::post('/',[ComentarioController::class, 'store']);//->middleware('scopes:altaProducto');
-    Route::get('/{id}',[ComentarioController::class, 'show']);
-    //Route::delete('/{id}',[PublicacionController::class, 'destroy']);
-    //Route::get('/publicacion/{id}',[PublicacionController::class, 'getPublicacionByProducto'])->middleware('scopes:altaProducto');
+    Route::post('/', [CommentController::class, 'store']); //->middleware('scopes:altaProducto');
+    Route::get('/{id}', [CommentController::class, 'show']);
+    //Route::delete('/{id}',[PostController::class, 'destroy']);
+    //Route::get('/Post/{id}',[PostController::class, 'getPostByProducto'])->middleware('scopes:altaProducto');
 });
 
-Route::group(['prefix' => 'pago'/*, 'middleware' => ['auth:api']*/], function () {
+Route::group(['prefix' => 'pago', 'middleware' => ['auth:api']], function () {
 
-    Route::get('/', [PagoController::class, 'verVistaPago']);
-    Route::post('/',[PagoController::class, 'realizarPago']);
+    Route::get('/', [PaymentController::class, 'verVistaPago']);
+    Route::post('/', [PaymentController::class, 'realizarPago']);
 });
 
 Route::group(['prefix' => 'busqueda'], function () {
 
-    Route::get('/productos/{criterio}', [ProductoController::class, 'buscarProducto']);
+    Route::get('/productos/{criterio}', [ProductController::class, 'buscarProducto']);
 });
 
 Route::post('/ingresar', [LoginController::class, 'authenticate']);

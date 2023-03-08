@@ -8,11 +8,6 @@ use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
@@ -26,7 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Passport::routes();
+        /* Passport::routes();
         
         Passport::personalAccessTokensExpireIn(now()->addMinutes(15));
 
@@ -36,6 +31,6 @@ class AuthServiceProvider extends ServiceProvider
             'bajaProducto' => 'Dar de baja un producto',
             'ABMRoles' => 'Alta baja y modificiacion Roles',
             'ABMPermisos' => 'Alta baja y modificiacion Permisos',
-        ]);
+        ]); */
     }
 }

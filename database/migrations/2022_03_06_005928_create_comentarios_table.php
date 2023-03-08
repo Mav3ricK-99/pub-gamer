@@ -16,15 +16,13 @@ return new class extends Migration
         Schema::create('comentarios', function (Blueprint $table) {
             
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('autorComentario');
-            $table->foreign('autorComentario')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained('users');
             $table->string('mensaje');
-            $table->morphs('comentable');
-            $table->unsignedBigInteger('respuesta_id')->nullable();
-            $table->foreign('respuesta_id')->references('id')->on('comentarios')->onDelete('cascade');
+            $table->uuidMorphs('comentable');
+            /* $table->foreignId('respuesta_id')->nullable()->constrained('comentarios')->onDelete('cascade');
+            $table->foreignUuid('publicacion_id')->constrained('publicaciones'); */
             $table->timestamps();
             $table->softDeletes();
-            
         });
 
         

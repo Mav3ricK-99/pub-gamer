@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ComentarioStoreRequest;
+use App\Http\Requests\CommentStoreRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Models\Comentario;
+use App\Models\Comment;
 use App\Models\Publicacion;
 
-class ComentarioController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,22 +37,22 @@ class ComentarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ComentarioStoreRequest $request)
+    public function store(CommentStoreRequest $request)
     {
         $data = $request->all();
 
-        $comentario = new Comentario();
+        $Comment = new Comment();
         $publicacion = Publicacion::find($data['publicacion_id']);
 
-        $comentario->mensaje = $data['mensaje'];
-        $comentario->user()->associate($request->user());
+        $Comment->mensaje = $data['mensaje'];
+        $Comment->user()->associate($request->user());
         if(isset($data['respuesta_id'])){
-            $comentario->respuesta_id = $data['respuesta_id'];
+            $Comment->respuesta_id = $data['respuesta_id'];
         }
 
-        $publicacion->comentarios()->save($comentario);
+        $publicacion->Comments()->save($Comment);
         
-        return response()->json($comentario);
+        return response()->json($Comment);
     }
 
     /**
@@ -63,7 +63,7 @@ class ComentarioController extends Controller
      */
     public function show($id)
     {
-        return response()->json(Comentario::find($id));
+        return response()->json(Comment::find($id));
     }
 
     /**
@@ -99,11 +99,11 @@ class ComentarioController extends Controller
     {
         $this->validarID($id);
 
-        $comentario = Comentario::find($id);
-        $resultado = ['mensaje' => 'El comentario ya fue eliminado anteriormente'];
+        $Comment = Comment::find($id);
+        $resultado = ['mensaje' => 'El Comment ya fue eliminado anteriormente'];
 
-        if($comentario){
-            $resultado = $comentario->delete();
+        if($Comment){
+            $resultado = $Comment->delete();
         }
 
         return response()->json($resultado);
@@ -112,8 +112,8 @@ class ComentarioController extends Controller
     public function validarID($id){
 
         $validator = Validator::make(['id' => $id],[
-            'id' => 'required|exists:comentarios,id',
-        ], ['*.exists' => 'El comentario no se encuentra en la base de datos']);
+            'id' => 'required|exists:Comments,id',
+        ], ['*.exists' => 'El Comment no se encuentra en la base de datos']);
 
         if($validator->fails()){
             throw new HttpResponseException(response()->json([

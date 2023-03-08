@@ -7,21 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\User;
-use App\Models\Publicacion;
+use App\Models\Post;
 
-class Comentario extends Model
+class Comment extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
+    protected $table = 'comentarios';
+
     protected $fillable = [
-        'autorComentario',
+        'user_id',
         'mensaje',
+        'comentable_type',
     ];
+    
+    public function comentable()
+    {
+        return $this->morphTo();
+    }
 
     public function respuestas()
-    {            
-        return $this->hasMany(Comentario::class, 'respuesta_id');
+    {
+        return $this->morphMany(Comment::class, 'comentable', Comment::class);
     }
 
     public function user(){
@@ -29,9 +37,9 @@ class Comentario extends Model
         return $this->belongsTo(User::class, 'autorComentario');
     }
 
-    public function publicacion(){
+    public function post(){
         
-        return $this->belongsTo(Publicacion::class);
+        return $this->belongsTo(Post::class);
     }
 
 }
